@@ -91,8 +91,6 @@ Returns:
   NTFS_VOLUME  *Volume;
   UINT32 MediaId;
 
-  //Print(L"NtfsAllocateVolume\n");
-
   ntfsInit();
   //
   // Allocate a volume structure
@@ -102,8 +100,6 @@ Returns:
     return EFI_OUT_OF_RESOURCES;
   }
 
-
-  //CpuBreakpoint();
 
   //
   // Initialize the structure
@@ -117,17 +113,6 @@ Returns:
   Volume->VolumeInterface.Revision    = EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_REVISION;
   Volume->VolumeInterface.OpenVolume  = NtfsOpenVolume;
 
-  
-  //InitializeListHead (&Volume->CheckRef);
-  //InitializeListHead (&Volume->DirCacheList);
-  //
-  // Initialize Root Directory entry
-  //
-  //Volume->RootDirEnt.FileString       = Volume->RootFileString;
-  //Volume->RootDirEnt.Entry.Attributes = ;
-  //
-  // Check to see if there's a file system on the volume
-  //
   Status = NtfsOpenDevice (Volume);
   if (EFI_ERROR (Status)) {
     goto Done;
@@ -147,12 +132,7 @@ Returns:
 
   if (Volume->vd == NULL)
   {
-	  //Print(L"Allocation of 'volume' failed.\n\r");
 	  goto Done;
-  }
-  else
-  {
-		//Print(L"Allocation of 'volume' successful.\n\r");
   }
 
   //
@@ -165,23 +145,19 @@ Returns:
                   NULL
                   );
   if (EFI_ERROR (Status)) {
-    //Print(L"InstallMultipleProtocolInterfaces %x", Status);
     goto Done;
   }
   //
   // Volume installed
   //
   DEBUG ((EFI_D_INIT, "Installed NTFS filesystem on %p\n", Handle));
-  //Print(L"Installed NTFS filesystem on %p\n", Handle);
   Volume->Valid = TRUE;
 
 Done:
   if (EFI_ERROR (Status)) {
-    //Print(L"FreePool(volume)\n");
     FreePool(Volume);
   }
 
-  //Print(L"Leave NtfsAllocateVolume\n");
   return Status;
 }
 
@@ -248,7 +224,6 @@ Returns:
   // EFI_NO_MEDIA.
   //
   if (Volume->root != NULL) {
-		//Print(L"Destruction of volume->root");
 		ntfs_inode_close(Volume->root);
 		Volume->root = NULL;
 		ntfs_umount(Volume->vol, false);
@@ -266,8 +241,6 @@ Returns:
   // FatCleanupVolume do the task.
   //
   if (LockedByMe) {
-    //FatCleanupVolume (Volume, NULL, EFI_SUCCESS);
-    //FatReleaseLock ();
 	  NtfsReleaseLock();
   }
 
@@ -313,17 +286,14 @@ Returns:
 
   DiskIo  = Volume->DiskIo;
   Status  = DiskIo->ReadDisk (DiskIo, Volume->MediaId, 0, sizeof (NtfsBs), &NtfsBs);
-  //Print(L"[Init] ReadDisk (%x, %x, %x, %x)\n\r", DiskIo, Volume->MediaId, 0, sizeof(NtfsBs));
   
   if (EFI_ERROR (Status)) {
     DEBUG ((EFI_D_INIT, "NtfsOpenDevice: read of part_lba failed %r\n", Status));
-	//gST->ConOut->OutputString(gST->ConOut, L"NtfsOpenDevice: read of part_lba failed\n\n");
     return Status;
   }
 
   if (ntfs_boot_sector_is_ntfs(&NtfsBs) == FALSE) {
 	  DEBUG ((EFI_D_INIT, "NtfsOpenDevice: ntfs_boot_sector_is_ntfs FALSE\n", Status));
-	  //gST->ConOut->OutputString(gST->ConOut, L"NtfsOpenDevice: ntfs_boot_sector_is_ntfs FALSE\n\n");
 	  return EFI_UNSUPPORTED;
   }
 

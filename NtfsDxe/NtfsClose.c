@@ -50,19 +50,19 @@ Returns:
 
 	IFile = IFILE_FROM_FHAND(FHand);	// cast from "EFI" to FHAND
 
-	//Print(L"NtfsClose: %x %s\n\r", IFile, (IFile->FileName != NULL) ? IFile->FileName : L"");
-
-	if (IFile->Type == FSW_EFI_FILE_TYPE_FILE) {
-		//Print(L"FSW_EFI_FILE_TYPE_FILE.\n\r");
+	if (IFile->Type == FSW_EFI_FILE_TYPE_FILE)
+	{
 		ZeroMem(&r, sizeof(struct _reent));
 		ntfs_close_r(&r, IFile->state.file);
 
 		Status = EFI_SUCCESS;
-	} else if (IFile->Type == FSW_EFI_FILE_TYPE_DIR) {	// unimplemented!
-		//Print(L"FSW_EFI_FILE_TYPE_DIR.\n\r");
+	}
+	else if (IFile->Type == FSW_EFI_FILE_TYPE_DIR)
+	{	// unimplemented!
 		Status = EFI_SUCCESS;
 		ntfsCloseEntry(IFile->Volume->vd, IFile->inode);
-	} else
+	} 
+	else
 		Status = EFI_INVALID_PARAMETER;
 
 	if (IFile->state.file != NULL)

@@ -1,8 +1,4 @@
 /***
- *  ]HackingTeam[ s.r.l.
- *  (c) 2012
- *
- *  STDIO implementation!
  **/
 
 #ifndef __STDIO_H_

@@ -76,7 +76,6 @@ EFI_STATUS fsw_efi_dir_read(IN NTFS_IFILE *File,
 
 	if (dir == NULL)
 	{
-		//int(L"directory not opened... fetching!\n\r");
 		File->state.dir = AllocateZeroPool(sizeof(ntfs_dir_state));
 		dir = File->state.dir;
 
@@ -101,7 +100,6 @@ EFI_STATUS fsw_efi_dir_read(IN NTFS_IFILE *File,
 
 		if (dir->ni == NULL)
 		{	// first fetch
-			//Print(L"first fetch...\n\r");
 			dir->ni = File->inode;
 			dir->vd = Volume->vd;
 			ntfs_diropen_r(&r, dir, NULL);
@@ -109,11 +107,6 @@ EFI_STATUS fsw_efi_dir_read(IN NTFS_IFILE *File,
 
 		if (dir->current == NULL)
 		{
-			/*Print(L"current element in directory is?!?!.!\n\r");
-			Print(L"[DEBUG] dir %x\n\r", dir);
-			Print(L"[DEBUG]    .inode %x %l\n\r", dir->ni, dir->ni->mft_no);
-			Print(L"[DEBUG]    .first %x\n\r", dir->first);
-			Print(L"[DEBUG]    .vd %x\n\r", dir->vd);*/
 			ZeroMem(FileInfo, sizeof(EFI_FILE_INFO));
 			*BufferSize = 0;
 			return EFI_SUCCESS;
@@ -123,18 +116,14 @@ EFI_STATUS fsw_efi_dir_read(IN NTFS_IFILE *File,
 
 	FileNameLength = strlen(dir->current->name) + 1;
 	RequiredSize = sizeof(EFI_FILE_INFO) + (FileNameLength * sizeof(CHAR16));
-	//Print(L" size: %d", RequiredSize);
 
 	if (*BufferSize < RequiredSize)
 	{
-		//Print(L"err;" );
 		*BufferSize = RequiredSize;
 		return EFI_BUFFER_TOO_SMALL;
 	}
 
-	//Print(L"ok;");
 	ZeroMem(FileInfo, RequiredSize);
-	//Print(L"fsw_efi_dir_read for inode %x\n\r", (UINT32) dir->current->mref);
 
 	inode = ntfs_inode_open(File->Volume->vol, dir->current->mref);	
 	

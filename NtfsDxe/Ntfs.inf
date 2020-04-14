@@ -6,6 +6,7 @@
 #  It also produces the Simple File System protocol for the consumer to
 #  perform file and directory operations on the disk.
 #
+#  Copyleft (c) 2020, cod
 #  Copyright (c) 2012 - 2014, ]HackingTeam[. All rights reserved.<BR>
 #
 #
