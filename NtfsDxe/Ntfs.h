@@ -222,9 +222,10 @@ typedef struct {
   ntfs_inode		  *inode;
   ntfs_inode		  *dir_ni;
   struct _NTFS_VOLUME  *Volume;
-
-  struct _ntfs_dir_state	*dirState;	// valid only for directory
-  struct _ntfs_file_state	*fileState;	// valid only for file
+  union {
+    struct _ntfs_dir_state	*dir;  // valid only for directory
+    struct _ntfs_file_state	*file; // valid only for file
+  } state;
 
   BOOLEAN			 RootDir;
   CHAR8				FileName[260];			// ""

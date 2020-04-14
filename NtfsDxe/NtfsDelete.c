@@ -85,16 +85,10 @@ free:
 		ntfs_inode_close(ni);
 	}
 
-	if (IFile->dirState)
+	if (IFile->state.file)	// IFile->state is union.. directory and file have same task
 	{
-		FreePool(IFile->dirState);
-		IFile->dirState = NULL;
-	}
-
-	if (IFile->fileState)
-	{
-		FreePool(IFile->fileState);
-		IFile->fileState = NULL;
+		FreePool(IFile->state.file);
+		IFile->state.file = NULL;
 	}
 exit:
 	return Status;

@@ -72,13 +72,13 @@ EFI_STATUS fsw_efi_dir_read(IN NTFS_IFILE *File,
 		return EFI_NOT_FOUND;
 	}
 
-	dir = File->dirState;
+	dir = File->state.dir;
 
 	if (dir == NULL)
 	{
 		//int(L"directory not opened... fetching!\n\r");
-		File->dirState = AllocateZeroPool(sizeof(ntfs_dir_state));
-		dir = File->dirState;
+		File->state.dir = AllocateZeroPool(sizeof(ntfs_dir_state));
+		dir = File->state.dir;
 
 		r.dummy = 0;
 		r._errno = 0;
@@ -191,7 +191,7 @@ EFI_STATUS fsw_efi_dir_read(IN NTFS_IFILE *File,
 	// close inode
 	ntfs_inode_close(inode);
 
-	if (ntfs_dirnext_r(&r, File->dirState, dir->current->name, &filestat) == -1)
+	if (ntfs_dirnext_r(&r, File->state.dir, dir->current->name, &filestat) == -1)
 		File->Position = -1;	// move to next position!
 	else
 		File->Position++;

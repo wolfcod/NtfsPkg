@@ -58,7 +58,7 @@ Returns:
 	{
 		ZeroMem(&r, sizeof(struct _reent));
 		
-		position = ntfs_seek_r(&r, IFile->fileState, 0, SEEK_CUR);
+		position = ntfs_seek_r(&r, IFile->state.file, 0, SEEK_CUR);
 		*Position = position;
 		return EFI_SUCCESS;
 	}

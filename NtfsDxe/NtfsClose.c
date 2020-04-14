@@ -55,7 +55,7 @@ Returns:
 	if (IFile->Type == FSW_EFI_FILE_TYPE_FILE) {
 		//Print(L"FSW_EFI_FILE_TYPE_FILE.\n\r");
 		ZeroMem(&r, sizeof(struct _reent));
-		ntfs_close_r(&r, IFile->fileState);
+		ntfs_close_r(&r, IFile->state.file);
 
 		Status = EFI_SUCCESS;
 	} else if (IFile->Type == FSW_EFI_FILE_TYPE_DIR) {	// unimplemented!
@@ -64,17 +64,11 @@ Returns:
 		ntfsCloseEntry(IFile->Volume->vd, IFile->inode);
 	} else
 		Status = EFI_INVALID_PARAMETER;
-	
-	if (IFile->dirState != NULL)
-	{	// free dirstate object
-		FreePool(IFile->dirState);
-		IFile->dirState = NULL;
-	}
 
-	if (IFile->fileState != NULL)
-	{	// free filestate object
-		FreePool(IFile->fileState);
-		IFile->fileState = NULL;
+	if (IFile->state.file != NULL)
+	{	// free filestate object or dirstate object
+		FreePool(IFile->state.file);
+		IFile->state.file = NULL;
 	}
 
 	if (Status == EFI_SUCCESS)

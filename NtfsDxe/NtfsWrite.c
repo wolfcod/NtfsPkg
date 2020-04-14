@@ -64,7 +64,7 @@ Returns:
 	if (IFile->Type == FSW_EFI_FILE_TYPE_FILE)
 	{
 		ZeroMem(&r, sizeof(struct _reent));
-		rbytes = ntfs_write_r(&r, IFile->fileState, Buffer, *BufferSize);
+		rbytes = ntfs_write_r(&r, IFile->state.file, Buffer, *BufferSize);
 
 		if (rbytes >= 0)
 		{

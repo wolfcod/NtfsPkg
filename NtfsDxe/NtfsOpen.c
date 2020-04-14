@@ -224,15 +224,15 @@ Returns:
 
 		if (NewIFile->Type == FSW_EFI_FILE_TYPE_FILE)
 		{	// open file
-			NewIFile->fileState = AllocateZeroPool(sizeof(struct _ntfs_file_state));
+			NewIFile->state.file = AllocateZeroPool(sizeof(struct _ntfs_file_state));
 
-			NewIFile->fileState->vd = Volume->vd;	// sete reference
-			NewIFile->fileState->ni = inode;
-			ntfs_open_r(&r, NewIFile->fileState, AsciiFileName, flags, 0);
+			NewIFile->state.file->vd = Volume->vd;	// sete reference
+			NewIFile->state.file->ni = inode;
+			ntfs_open_r(&r, NewIFile->state.file, AsciiFileName, flags, 0);
 		}
 		else if (NewIFile->Type == FSW_EFI_FILE_TYPE_DIR)
 		{	//
-			NewIFile->dirState = AllocateZeroPool(sizeof(ntfs_dir_state));
+			NewIFile->state.dir = AllocateZeroPool(sizeof(ntfs_dir_state));
 		}
 
 		Status = EFI_SUCCESS;
