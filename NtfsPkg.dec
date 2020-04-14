@@ -1,14 +1,7 @@
 ## @file
-# (c) 2012-2014 HT srl
-# Via della Moscova 13
-# 20121, Milano (MI), Italy
-# http://www.hackingteam.com
+# # This package provides binary device drivers to support the NTFS file system.
 #
-# This package provides binary device drivers to support the NTFS file system.
-#
-# This package provides NTFS drivers which are not licensed under BSD.
-# Copyright (c) 2012 - 2014, ]HackingTeam[. All rights reserved.<BR>
-#
+#  
 ##
 
 [Defines]

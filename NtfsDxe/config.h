@@ -1,7 +1,4 @@
 /***
- *  ]HackingTeam[ s.r.l.
- *  (c) 2012
- *
  *  Configuration file!
  **/
 
@@ -16,9 +13,6 @@
 
 
 /***
- *  ]HackingTeam[ s.r.l.
- *  (c) 2012
- *
  *  Setup Configuration File
  **/
 
