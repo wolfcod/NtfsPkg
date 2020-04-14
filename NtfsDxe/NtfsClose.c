@@ -65,6 +65,7 @@ Returns:
 	else
 		Status = EFI_INVALID_PARAMETER;
 
+	Ntfs_Deallocate(IFile);
 	if (IFile->state.file != NULL)
 	{	// free filestate object or dirstate object
 		FreePool(IFile->state.file);

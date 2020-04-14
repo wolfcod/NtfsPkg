@@ -21,7 +21,6 @@ Revision History
 #include "Ntfs.h"
 #include "ntfs/ntfsdir.h"
 
-
 UINTN EFIAPI CreateFileName(CHAR8 *Destination, CHAR8 *Path, CHAR8 *FileName)
 {
 	CHAR8 *Ptr, *ClearPtr;
@@ -116,8 +115,7 @@ end:
 	return (UINTN) (Destination - Ptr);
 }
 
-
-VOID
+static VOID
 Ntfs_FileHandle_init(
 	EFI_FILE_PROTOCOL *Handle)
 {
@@ -171,6 +169,19 @@ Ntfs_inode_to_FileHandle(
 	}
 
 	*NewFileHandle = &NewIFile->Handle;
+
+	return EFI_SUCCESS;
+}
+
+EFI_STATUS
+EFIAPI
+Ntfs_Deallocate(NTFS_IFILE	*IFile)
+{
+	if (IFile->state.file)	// IFile->state is union.. directory and file have same task
+	{
+		FreePool(IFile->state.file);
+		IFile->state.file = NULL;
+	}
 
 	return EFI_SUCCESS;
 }

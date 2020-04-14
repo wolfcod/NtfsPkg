@@ -675,27 +675,7 @@ NtfsOpenVolume (
 
 // Handle.c
 UINTN EFIAPI CreateFileName(CHAR8 *Destination, CHAR8 *Path, CHAR8 *FileName);
-
-//
-// ReadWrite.c
-//
-
-//
-// DirectoryManage.c
-//
-
-//
-// Hash.c
-//
-
-
-//
-// FileName.c
-//
-
-//
-// DirectoryCache.c
-//
+EFI_STATUS EFIAPI Ntfs_Deallocate(NTFS_IFILE	*IFile);
 
 //
 // Global Variables

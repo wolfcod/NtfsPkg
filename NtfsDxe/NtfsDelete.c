@@ -50,7 +50,6 @@ Returns:
 	CHAR16  *unicode;
 
 	IFile = IFILE_FROM_FHAND(FHand);
-	
 
 	// Default error
 	Status = EFI_WARN_DELETE_FAILURE;
@@ -60,8 +59,6 @@ Returns:
 
 	if (IFile->FileName == NULL)
 		goto free;
-
-	//CpuBreakpoint();
 
 	ni = IFile->inode;
 	dir_ni = IFile->dir_ni;
@@ -85,11 +82,7 @@ free:
 		ntfs_inode_close(ni);
 	}
 
-	if (IFile->state.file)	// IFile->state is union.. directory and file have same task
-	{
-		FreePool(IFile->state.file);
-		IFile->state.file = NULL;
-	}
+	Ntfs_Deallocate(IFile);	// deallocate memory...
 exit:
 	return Status;
 }
