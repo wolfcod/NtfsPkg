@@ -11,14 +11,6 @@
 #pragma warning (disable : 4244)	// conversion from x to y possible loss of data
 #pragma warning (disable : 4018)	// signed/unsigned mismatch
 
-
-/***
- *  Setup Configuration File
- **/
-
-#ifndef __SETUP_H__
-    #define __SETUP_H__
-
 // Disk access method
 #define USE_CHS 0x1
 
@@ -38,16 +30,9 @@
 
 // Support for C++ features
 //#define __SUPPORT_CPP_MEM_ALLOC
-#endif
-
-
-#ifndef __MACRO_H_
-    #define __MACRO_H_
 
 #define CALC_OFFSET(type, x, y) (type) ((VOID *) (((UINTN) x) + y))
 #define OFFSET(x, y) (void *) (((UINTN) x) + y)
-#endif
-
 
 #define size_t	int
 #define _CRT_SECURE_NO_WARNINGS
@@ -70,7 +55,5 @@
 #include <sys/types.h>
 #include <stdint.h>
 
-//#include <types.h>
-#define ptrdiff_t(x) ((int)x)
 #endif
 
