@@ -181,7 +181,6 @@ Done:
     FreePool(Volume);
   }
 
-  //DiagnosticSizeOf();
   //Print(L"Leave NtfsAllocateVolume\n");
   return Status;
 }

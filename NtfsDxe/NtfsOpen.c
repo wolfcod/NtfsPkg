@@ -232,7 +232,7 @@ Returns:
 		}
 		else if (NewIFile->Type == FSW_EFI_FILE_TYPE_DIR)
 		{	//
-			NewIFile->state.dir = AllocateZeroPool(sizeof(ntfs_dir_state));
+			NewIFile->state.dir  = AllocateZeroPool(sizeof(ntfs_dir_state));
 		}
 
 		Status = EFI_SUCCESS;

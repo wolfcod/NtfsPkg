@@ -113,18 +113,6 @@ end:
 		}
 	}
 
-	/* File path must start with "\\" */
-	//ClearPtr = Ptr;
-
-	//if (ClearPtr[0] == '\\')
-	//{
-	//	while(*ClearPtr != 0)
-	//	{
-	//		ClearPtr[0] = ClearPtr[1];
-	//		ClearPtr++;
-	//	}
-	//}
-
 	return (UINTN) (Destination - Ptr);
 }
 
