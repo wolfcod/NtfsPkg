@@ -525,7 +525,6 @@ static int ntfs_utf16_to_utf8(const ntfschar *ins, const int ins_len,
 		outs_len = PATH_MAX;
 
 	size = utf16_to_utf8_size(ins, ins_len, outs_len);
-	//Print(L"utf16_to_utf8_size %d\n\r", size);
 
 	if (size < 0)
 		goto out;
@@ -535,7 +534,6 @@ static int ntfs_utf16_to_utf8(const ntfschar *ins, const int ins_len,
 		*outs = (char *) ntfs_malloc(outs_len);
 		if (!*outs)
 		{
-			//Print(L"malloc failed for length.");
 			goto out;
 		}
 		else
@@ -615,11 +613,9 @@ static int ntfs_utf16_to_utf8(const ntfschar *ins, const int ins_len,
 	ret = t - *outs;
 
 out:
-	//Print(L"\n\rntfs_utf16_to_utf8 return %d\n\r", ret);
 	return ret;
 fail:
 	errno = EILSEQ;
-	//Print(L"EILSEQ");
 	goto out;
 }
 
@@ -860,16 +856,12 @@ int ntfs_ucstombs(const ntfschar *ins, const int ins_len, char **outs,
 	mbs = *outs;
 	mbs_len = outs_len;
 	if (mbs && !mbs_len) {
-		//Print(L"ntfs_ucstombs ENAMETOOLONG\n\r");
 		errno = ENAMETOOLONG;
 		return -1;
 	}
 	if (use_utf8)
 	{
-		//Print(L"%s\n\r", &ins[1]);
 		ret = ntfs_utf16_to_utf8(ins, ins_len, outs, outs_len);
-
-		//Print(L"ntfs_ucstombs -> %d %x %d\n\r", ret, *outs, strlen(*outs));
 
 		return ret;
 	}

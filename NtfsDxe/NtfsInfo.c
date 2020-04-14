@@ -98,7 +98,6 @@ GetFileSystemInfo (
 	RequiredSize = SIZE_OF_EFI_FILE_SYSTEM_INFO + 10;
 
 	if (*BufferSize < RequiredSize) {
-		//Print(L"GetFileSystemInfo BUFFER_TOO_SMALL\n\r");
 		*BufferSize = RequiredSize;
 		return EFI_BUFFER_TOO_SMALL;
 	}
@@ -112,7 +111,6 @@ GetFileSystemInfo (
 	FSInfo->Size = RequiredSize;
 	FSInfo->ReadOnly = TRUE;
 	FSInfo->BlockSize = Volume->vol->cluster_size;
-	//StrCpy(FSInfo->VolumeLabel, L"NTFS");
 	FSInfo->VolumeLabel[0] = L'N';
 	FSInfo->VolumeLabel[1] = L'T';
 	FSInfo->VolumeLabel[2] = L'F';
@@ -214,7 +212,6 @@ GetFileInfo (
 	}
 
 	if (*BufferSize < RequiredSize) {
-		//Print(L"GetFileInfo: Buffer too small\n");
 		*BufferSize = RequiredSize;
 		return EFI_BUFFER_TOO_SMALL;
 	}
@@ -229,7 +226,6 @@ GetFileInfo (
 	{	// Root volume
 		Buffer->Attribute = EFI_FILE_READ_ONLY | EFI_FILE_DIRECTORY;
 		Buffer->FileName[0] = L'\0';
-		//Print(L"GetFileInfo: root\n");
 	}
 	else
 	{
@@ -264,10 +260,8 @@ GetFileInfo (
 	}
 
 	
-	//Print(L"Info -> %s\n", Buffer->FileName);
 	*BufferSize = RequiredSize;
 	
-	//Print(L"GetFileInfo %x %s\n\r", RequiredSize, IFile->FileName);
 	return EFI_SUCCESS;
 
 }
@@ -280,69 +274,7 @@ SetFileInfo (
   )
 
 {
-	/*UINTN	ResultSize, NameSize, Index, RequiredSize;
-	ntfs_inode *inode;
-	ATTR_RECORD *rec;
-	FILE_NAME_ATTR *attr;
-	ntfs_attr_search_ctx *ctx;
-	int space = 4;
-	CHAR16 *unicode;
-	
-	//CpuBreakpoint();
-
-	if (IFile->inode->mft_no == FILE_root) 
-	{	// no name for this file!
-		RequiredSize = SIZE_OF_EFI_FILE_INFO + sizeof(CHAR16);
-	}
-	else
-	{
-		RequiredSize = SIZE_OF_EFI_FILE_INFO + ((AsciiStrLen(IFile->FileName) + 1) * sizeof(CHAR16));
-	}
-
-	if (*BufferSize < RequiredSize) {
-		Print(L"GetFileInfo: Buffer too small\n");
-		*BufferSize = RequiredSize;
-		return EFI_BUFFER_TOO_SMALL;
-	}
-
-	inode = IFile->inode;
-
-	ZeroMem(Buffer, RequiredSize);
-
-	Buffer->Size = RequiredSize;
-
-	if (IFile->inode->mft_no == FILE_root)
-	{	// Root volume
-		Buffer->Attribute = EFI_FILE_READ_ONLY | EFI_FILE_DIRECTORY;
-		Buffer->FileName[0] = L'\0';
-		Print(L"GetFileInfo: root\n");
-	}
-	else
-	{
-		if (IFile->Type == FSW_EFI_FILE_TYPE_DIR)	// is directory!
-		{
-			Buffer->Attribute |= EFI_FILE_DIRECTORY;
-		}
-	
-		unicode = AllocateZeroPool((AsciiStrLen(IFile->FileName) + 1) * sizeof(CHAR16));
-		AsciiStrToUnicodeStr(IFile->FileName, unicode);
-		CopyMem((UINT8 *) Buffer->FileName, unicode, AsciiStrLen(IFile->FileName) * sizeof(CHAR16));
-
-		FreePool(unicode);
-		Buffer->FileSize = inode->data_size;		
-		Buffer->PhysicalSize = inode->allocated_size;
-			
-		fsw_efi_decode_time(&Buffer->CreateTime, inode->creation_time);
-		fsw_efi_decode_time(&Buffer->LastAccessTime, inode->last_access_time);
-		fsw_efi_decode_time(&Buffer->ModificationTime, inode->last_data_change_time);
-
-	}
-
-	
-
-	*BufferSize = RequiredSize;*/
-	
-	//Print(L"GetFileInfo %x %s\n\r", RequiredSize, IFile->FileName);
+	/* ignore action */
 	return EFI_SUCCESS;
 
 }
@@ -384,18 +316,19 @@ Returns:
 
 	IFile = IFILE_FROM_FHAND(FHand);
 
-	if (CompareGuid(Type, &FileSystemVolumeLabelInfo) != 0) {
-		//Print(L"\tFile System Volume Label Info\n\r");
-		return GetFileSystemVolumeLabelInfo(IFile, BufferSize, Buffer);
-	} else if (CompareGuid(Type, &FileSystemInfo) != 0) {
-		//Print(L"\tFile System Info\n\r");
-		return GetFileSystemInfo(IFile, BufferSize, Buffer);
-	} else if (CompareGuid(Type, &GenericFileInfo) != 0)
+	if (CompareGuid(Type, &FileSystemVolumeLabelInfo) != 0)
 	{
-		//Print(L"\tGeneric File Info\n\r");
-		return GetFileInfo(IFile, BufferSize, Buffer);
-	} else {
-		//Print(L"\tunsupported\n\r");
+		Status = GetFileSystemVolumeLabelInfo(IFile, BufferSize, Buffer);
+	}
+	else if (CompareGuid(Type, &FileSystemInfo) != 0)
+	{
+		Status = GetFileSystemInfo(IFile, BufferSize, Buffer);
+	}
+	else if (CompareGuid(Type, &GenericFileInfo) != 0)
+	{
+		Status = GetFileInfo(IFile, BufferSize, Buffer);
+	} else
+	{
 		Status = EFI_UNSUPPORTED;
 	}
 
@@ -440,18 +373,20 @@ Returns:
 
 	IFile = IFILE_FROM_FHAND(FHand);
 
-	if (CompareGuid(Type, &FileSystemVolumeLabelInfo) != 0) {
-		//Print(L"\tFile System Volume Label Info\n\r");
-		return SetFileSystemVolumeLabelInfo(IFile, BufferSize, Buffer);
-	} else if (CompareGuid(Type, &FileSystemInfo) != 0) {
-		//Print(L"\tFile System Info\n\r");
-		return SetFileSystemInfo(IFile, BufferSize, Buffer);
-	} else if (CompareGuid(Type, &GenericFileInfo) != 0)
+	if (CompareGuid(Type, &FileSystemVolumeLabelInfo) != 0)
 	{
-		//Print(L"\tGeneric File Info\n\r");
+		return SetFileSystemVolumeLabelInfo(IFile, BufferSize, Buffer);
+	}
+	else if (CompareGuid(Type, &FileSystemInfo) != 0)
+	{
+		return SetFileSystemInfo(IFile, BufferSize, Buffer);
+	}
+	else if (CompareGuid(Type, &GenericFileInfo) != 0)
+	{
 		return SetFileInfo(IFile, BufferSize, Buffer);
-	} else {
-		//Print(L"\tunsupported\n\r");
+	}
+	else
+	{
 		Status = EFI_UNSUPPORTED;
 	}
 

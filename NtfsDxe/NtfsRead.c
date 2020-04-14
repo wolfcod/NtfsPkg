@@ -74,9 +74,7 @@ Returns:
 	}
 	else if (IFile->Type == FSW_EFI_FILE_TYPE_DIR)
 	{	// unimplemented!
-		//Print(L"NtfsRead: Accessing to directory");
 		Status = fsw_efi_dir_read(IFile, BufferSize, Buffer);
-		//Print(L"    !exit...\n\r");
 		return Status;
 	}
 	else

@@ -324,8 +324,6 @@ int ntfs_log_redirect(const char *function, const char *file,
 	/*if (!(ntfs_log.levels & level))		/* Don't log this message */
 	//	return 0;
 
-	//AsciiPrint("%a %a %d %d %a\n\r", function, file, line, level, format);
-	//AsciiPrint("ntfs_log_redirect: %a:%a:%d:%d:%a", function, file, line, level, format);
 	//va_start(args, format);
 	//errno = olderr;
 	//ret = ntfs_log.handler(function, file, line, level, data, format, args);

@@ -105,20 +105,9 @@ static int ntfs_device_uefi_io_open(struct ntfs_device *dev, int flags)
     }
 
     // Start the device interface and ensure that it is inserted
-    //if (!interface->startup()) {
-     //   ntfs_log_perror("device failed to start\n");
-      //  errno = EIO;
-      //  return -1;
-   // }
-    //if (!interface->isInserted()) {
-     //   ntfs_log_perror("device media is not inserted\n");
-      //  errno = EIO;
-       // return -1;
-    //}
 
     // Check that the device isn't already open (used by another volume?)
     if (NDevOpen(dev)) {
-		//AsciiPrint("ntfs_device_uefi_io_open...BUSY\n\r");
         ntfs_log_perror("device is busy (already open)\n");
         errno = EBUSY;
         return -1;
@@ -127,7 +116,6 @@ static int ntfs_device_uefi_io_open(struct ntfs_device *dev, int flags)
     // Check that there is a valid NTFS boot sector at the start of the device
     boot = (NTFS_BOOT_SECTOR *) ntfs_alloc(MAX_SECTOR_SIZE);
     if(boot == NULL) {
-		//AsciiPrint("ntfs_device_uefi_io_open...ENOMEM\n\r");
         errno = ENOMEM;
         return -1;
     }
@@ -135,11 +123,6 @@ static int ntfs_device_uefi_io_open(struct ntfs_device *dev, int flags)
 	 
 	
 	 if (DiskIo->ReadDisk(DiskIo, Volume->MediaId, 0, sizeof(NTFS_BOOT_SECTOR), boot) != EFI_SUCCESS) {
-		//AsciiPrint("DiskIo ptr %x\n\r", DiskIo);
-		//AsciiPrint("interface ptr %x\n\r", fd->interface);
-		//AsciiPrint("DiskIo->ReadDisk(%x,%x,%x)\n\r", fd->interface->MediaId, fd->startSector * fd->sectorSize, sizeof(NTFS_BOOT_SECTOR));
-		//AsciiPrint("Sector size: %x\n\r", fd->sectorSize);
-		//AsciiPrint("ntfs_device_uefi_io_open...read failure boot sector\n\r");
 		ntfs_log_perror("read failure @ sector %x\n", fd->startSector);
         errno = EIO;
         ntfs_free(boot);
@@ -147,7 +130,6 @@ static int ntfs_device_uefi_io_open(struct ntfs_device *dev, int flags)
 	}
 
     if (!ntfs_boot_sector_is_ntfs(boot)) {
-		//AsciiPrint("ntfs_device_uefi_io_open...EINVALIDPART\n\r");
         errno = EINVALPART;
         ntfs_free(boot);
         return -1;
@@ -177,7 +159,6 @@ static int ntfs_device_uefi_io_open(struct ntfs_device *dev, int flags)
     NDevSetBlock(dev);
     NDevSetOpen(dev);
 
-	//AsciiPrint("ntfs_device_uefi_io_open...success\n\r");
     return 0;
 }
 
@@ -189,7 +170,7 @@ static int ntfs_device_uefi_io_close(struct ntfs_device *dev)
 	struct _uefi_fd *fd = DEV_FD(dev);
     ntfs_log_trace("dev %p\n", dev);
 
-	//AsciiPrint("ntfs_device_uefi_io_close\n\r");
+	("ntfs_device_uefi_io_close\n\r");
     // Get the device driver descriptor
     
     if (!fd) {
@@ -245,7 +226,6 @@ static s64 ntfs_device_uefi_io_seek(struct ntfs_device *dev, s64 offset, int whe
 {
 	struct _uefi_fd *fd = DEV_FD(dev);
     ntfs_log_trace("dev %p, offset %li, whence %i\n", dev, offset, whence);
-	//AsciiPrint("ntfs_device_uefi_io_seek\n\r");
     // Get the device driver descriptor
     
     if (!fd) {
@@ -268,7 +248,6 @@ static s64 ntfs_device_uefi_io_seek(struct ntfs_device *dev, s64 offset, int whe
  */
 static s64 ntfs_device_uefi_io_read(struct ntfs_device *dev, void *buf, s64 count)
 {
-	//AsciiPrint("ntfs_device_uefi_io_read\n\r");
     return ntfs_device_uefi_io_readbytes(dev, DEV_FD(dev)->pos, count, buf);
 }
 
@@ -277,7 +256,6 @@ static s64 ntfs_device_uefi_io_read(struct ntfs_device *dev, void *buf, s64 coun
  */
 static s64 ntfs_device_uefi_io_write(struct ntfs_device *dev, const void *buf, s64 count)
 {
-	//AsciiPrint("ntfs_device_uefi_io_write\n\r");
     return ntfs_device_uefi_io_writebytes(dev, DEV_FD(dev)->pos, count, buf);
 }
 
@@ -286,7 +264,6 @@ static s64 ntfs_device_uefi_io_write(struct ntfs_device *dev, const void *buf, s
  */
 static s64 ntfs_device_uefi_io_pread(struct ntfs_device *dev, void *buf, s64 count, s64 offset)
 {
-	//AsciiPrint("ntfs_device_uefi_io_pread (%x, %x)\n\r", (UINTN) offset, (UINTN) count);
     return ntfs_device_uefi_io_readbytes(dev, offset, count, buf);
 }
 
@@ -295,7 +272,6 @@ static s64 ntfs_device_uefi_io_pread(struct ntfs_device *dev, void *buf, s64 cou
  */
 static s64 ntfs_device_uefi_io_pwrite(struct ntfs_device *dev, const void *buf, s64 count, s64 offset)
 {
-	//AsciiPrint("ntfs_device_uefi_io_pwrite\n\r");
     return ntfs_device_uefi_io_writebytes(dev, offset, count, buf);
 }
 
@@ -316,22 +292,13 @@ static s64 ntfs_device_uefi_io_readbytes(struct ntfs_device *dev, s64 offset, s6
     // Get the device driver descriptor
     
     if (!fd) {
-		//AsciiPrint("ntfs_device_uefi_io_readbytes EBADF\n\r");
 		ntfs_log_perror("EBADF");
         errno = EBADF;
         return -1;
     }
 
-    //// Get the device interface
-    //interface = fd->interface;
-    //if (!interface) {
-    //    errno = ENODEV;
-    //    return -1;
-    //}
-
     if(offset < 0)
     {
-		//AsciiPrint("ntfs_device_uefi_io_readbytes EROFS\n\r");
         errno = EROFS;
 		ntfs_log_perror("EROFS");
         return -1;
@@ -359,7 +326,6 @@ static s64 ntfs_device_uefi_io_readbytes(struct ntfs_device *dev, s64 offset, s6
         ntfs_log_trace("direct read from sector %d (%d sector(s) long)\n", sec_start, sec_count);
         if (!ntfs_device_uefi_io_readsectors(dev, sec_start, sec_count, buf)) {
             ntfs_log_perror("direct read failure @ sector %d (%d sector(s) long)\n", sec_start, sec_count);
-			//AsciiPrint("ntfs_device_uefi_io_readbytes EIO\n\r");
             errno = EIO;
 			
             return -1;
@@ -381,7 +347,6 @@ static s64 ntfs_device_uefi_io_readbytes(struct ntfs_device *dev, s64 offset, s6
         ntfs_log_trace("buffered read from sector %d (%d sector(s) long)\n", sec_start, sec_count);
         ntfs_log_trace("count: %d  sec_count:%d  fd->sectorSize: %d )\n", (u32)count, (u32)sec_count,(u32)fd->sectorSize);
         if (!ntfs_device_uefi_io_readsectors(dev, sec_start, sec_count, buffer)) {
-			//AsciiPrint("ntfs_device_uefi_io_readbytes buffered read failure\n\r");
             ntfs_log_perror("buffered read failure @ sector %d (%d sector(s) long)\n", sec_start, sec_count);
             ntfs_free(buffer);
             errno = EIO;
@@ -394,7 +359,6 @@ static s64 ntfs_device_uefi_io_readbytes(struct ntfs_device *dev, s64 offset, s6
 
     }
 
-	//ntfs_log_perror("Read %d sectors", count);
     return count;
 }
 
@@ -526,8 +490,6 @@ static bool ntfs_device_uefi_io_readsectors(struct ntfs_device *dev, sec_t secto
 	EFI_DISK_IO_PROTOCOL *DiskIo = fd->interface->DiskIo;
 	UINT64 _sectorStart, _bufferSize;
 
-	//AsciiPrint("ntfs_device_uefi_io_readsectors(sector %x, numSectors %x)\n\r", (UINTN) sector, (UINTN) numSectors);
-
 	ntfs_log_trace("ntfs_device_uefi_io_readsectors {%x,%d,%d}", dev, sector, numSectors);
     if (!fd) {
         errno = EBADF;
@@ -535,26 +497,18 @@ static bool ntfs_device_uefi_io_readsectors(struct ntfs_device *dev, sec_t secto
     }
     // Read the sectors from disc (or cache, if enabled)
 	if (fd->cache) {
-		//return _NTFS_cache_readSectors(fd->cache, sector, numSectors, buffer);
 		ntfs_log_trace("ntfs_device_uefi_io_readsectors cache enabled?!?!");
 	}
     else
 	{
 		while(numSectors > 0)
 		{
-			//AsciiPrint("DiskIo.ReadDisk sectors %x\n\r", (UINTN) numSectors );
 			_sectorStart = sector * fd->sectorSize;
 			_bufferSize = fd->sectorSize;
 
 			if (DiskIo->ReadDisk(DiskIo, fd->interface->MediaId, _sectorStart, _bufferSize, buffer) != EFI_SUCCESS)
 			{
-				/*AsciiPrint("DiskIo %x\n\r", DiskIo);
-				AsciiPrint("MediaId %x\n\r", fd->interface->MediaId);
-				AsciiPrint("sector %x%x\n\r", (UINTN) sector * fd->sectorSize);
-				AsciiPrint("numSectors %x%x\n\r", (UINTN)  fd->sectorSize);
-				AsciiPrint("buffer %x\n\r", buffer);
-				AsciiPrint("ntfs_device_uefi_io_readsectors [DISKIO!READDISK] FAILED!!!\n\r");*/
-				ntfs_log_trace("failed I/O!");
+    			ntfs_log_trace("failed I/O!");
 				return false;
 			}
 
@@ -562,9 +516,6 @@ static bool ntfs_device_uefi_io_readsectors(struct ntfs_device *dev, sec_t secto
 			sector++;		// increase sector start
 			buffer = CALC_OFFSET(void *, buffer, fd->sectorSize);	// move ptr!
 		}
-
-
-		//ReadDisk(DiskIo, fd->Volume->MediaId, fd->startSector * fd->sectorSize, sizeof(NTFS_BOOT_SECTOR), boot) 
 	}
 
     return true;
@@ -595,18 +546,11 @@ static bool ntfs_device_uefi_io_writesectors(struct ntfs_device *dev, sec_t sect
 	{
 		while(numSectors > 0)
 		{
-			//AsciiPrint("DiskIo.ReadDisk sectors %x\n\r", (UINTN) numSectors );
 			_sectorStart = sector * fd->sectorSize;
 			_bufferSize = fd->sectorSize;
 
 			if (DiskIo->WriteDisk(DiskIo, fd->interface->MediaId, _sectorStart, _bufferSize, buffer) != EFI_SUCCESS)
 			{
-				//AsciiPrint("DiskIo %x\n\r", DiskIo);
-				//AsciiPrint("MediaId %x\n\r", fd->interface->MediaId);
-				//AsciiPrint("sector %x%x\n\r", (UINTN) sector * fd->sectorSize);
-				//AsciiPrint("numSectors %x%x\n\r", (UINTN)  fd->sectorSize);
-				//AsciiPrint("buffer %x\n\r", buffer);
-				//AsciiPrint("ntfs_device_uefi_io_writesectors [DISKIO!WRITEDISK] FAILED!!!\n\r");
 				return false;
 			}
 
@@ -615,8 +559,6 @@ static bool ntfs_device_uefi_io_writesectors(struct ntfs_device *dev, sec_t sect
 			buffer = CALC_OFFSET(void *, buffer, fd->sectorSize);	// move ptr!
 		}
 	}
-
-        //return fd->interface->writeSectors(sector, numSectors, buffer);
 
     return true;
 }
@@ -641,10 +583,6 @@ static int ntfs_device_uefi_io_sync(struct ntfs_device *dev)
 
     // Flush any sectors in the disc cache (if required)
     if (fd->cache) {
-        /*if (!_NTFS_cache_flush(fd->cache)) {
-            errno = EIO;
-            return -1;
-        }*/
 		ntfs_log_trace("ntfs_device_uefi_io_sync cache enabled?!?!");
     }
 

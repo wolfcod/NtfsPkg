@@ -65,8 +65,6 @@ EFI_STATUS fsw_efi_dir_read(IN NTFS_IFILE *File,
 
 	ZeroMem(&r, sizeof(struct _reent));
 	
-//	Print(L"fsw_efi_dir_read\n\r");
-
 	if (File->Position < 0)	{
 		*BufferSize = 0;
 		return EFI_NOT_FOUND;

@@ -19,7 +19,6 @@ Revision History
 --*/
 
 #include "Ntfs.h"
-//#include "ntfs/dir.h"
 #include "ntfs/ntfsdir.h"
 
 EFI_STATUS
@@ -53,9 +52,6 @@ Returns:
 	NTFS_IFILE	*IFile;
 	ntfs_inode *inode;
 
-	//AsciiPrint("NtfsOpenVolume: entering...");
-	//Print(L"OpenVolume :");
-
 	Volume = VOLUME_FROM_VOL_INTERFACE (This);
 
 	NtfsAcquireLock  ();
@@ -70,7 +66,6 @@ Returns:
 	
 	if (inode == NULL)
 	{
-		//Print(L"ntfs_inode_open(vol, FILE_root failed!");
 		return EFI_VOLUME_CORRUPTED;
 	}
 

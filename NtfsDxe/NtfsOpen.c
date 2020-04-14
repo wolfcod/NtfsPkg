@@ -98,7 +98,6 @@ Returns:
 {
 	NTFS_IFILE   *IFile;
 	NTFS_IFILE   *NewIFile;
-	//NTFS_OFILE   *OFile;
 	EFI_STATUS  Status;
 	ntfs_inode	*inode;
 	NTFS_VOLUME *Volume;
@@ -111,7 +110,6 @@ Returns:
 	// Perform some parameter checking
 	//
 	if (FileName == NULL || (NewHandle == NULL)) {
-		//Print("NtfsOpen: FileName is null!\n\r");
 		return EFI_INVALID_PARAMETER;
 	}
 
@@ -120,21 +118,13 @@ Returns:
 	memset(AsciiFileName, 0, 260);
 	memset(TempPath, 0, 260);
 
-	FileNameSize = StrLen(FileName);
-		//FileNameSize +=  (IFile->FileName != NULL) ? StrLen(IFile->FileName) : 0;
-
 #ifdef DISABLE_NEW_DEPRECATED_INTERFACES
 	UnicodeStrToAsciiStrS(FileName, TempPath, 260);	// local name
 #else
 	UnicodeStrToAsciiStr(FileName, TempPath);	// local name
 #endif
 	
-	FileNameSize++;
-	//Print(L"NtfsOpen(%a, %s)\n", IFile->FullPath, FileName);
-
-	//AsciiPrint("FillFileName(%a,%a)\n", IFile->FullPath, TempPath);
 	FileNameSize = CreateFileName(AsciiFileName, IFile->FullPath, TempPath);
-
  
   //
   // Check for a valid mode
@@ -149,7 +139,6 @@ Returns:
 		break;
 
 	  default:
-		  //Print(L"NtfsOpen -> OpenMode invalid! %x\n\r", OpenMode);
 		  flags = 0; mode = 0;
 		return EFI_INVALID_PARAMETER;
   }
@@ -157,14 +146,13 @@ Returns:
   //
   // Check for valid Attributes for file creation case. 
   //
-  if (((OpenMode & EFI_FILE_MODE_CREATE) != 0) && (Attributes & (EFI_FILE_READ_ONLY | (~EFI_FILE_VALID_ATTR))) != 0) {
-	  //Print(L"NtfsOpen -> Attributes for file creation case failed.\n\r");
+  if (((OpenMode & EFI_FILE_MODE_CREATE) != 0) && (Attributes & (EFI_FILE_READ_ONLY | (~EFI_FILE_VALID_ATTR))) != 0)
+  {
 	return EFI_INVALID_PARAMETER;
   }
   
-  //OFile = IFile->OFile;
   Volume = IFile->Volume;
-  //Print(L"IFile %x\n\rVolume %x\n\rMFT no. %d\n\r", IFile, Volume, (UINTN) IFile->inode->mft_no);
+  
   //
   // Lock
   //

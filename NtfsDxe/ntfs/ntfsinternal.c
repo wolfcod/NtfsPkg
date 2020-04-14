@@ -146,13 +146,9 @@ const devoptab_t *ntfsGetDevice (const char *path, bool useDefaultDevice)
     char name[128] = {0};
     int i;
 
-	//Print(L"ntfsGetDevice ....");
 
     // Get the device name from the path
     strncpy(name, path, 127);
-    //strtok(name, ":/");
-
-	//Print(L" path %a\n", name);
 
     // Search the devoptab table for the specified device name
     // NOTE: We do this manually due to a 'bug' in GetDeviceOpTab
@@ -173,7 +169,6 @@ const devoptab_t *ntfsGetDevice (const char *path, bool useDefaultDevice)
     //if (useDefaultDevice)
     //    return GetDeviceOpTab("");
 
-	//Print(L"ntfsGetDevice return NULL!");
     return NULL;
 }
 

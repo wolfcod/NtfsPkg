@@ -145,7 +145,6 @@ Ntfs_inode_to_FileHandle(
 
 	if (inode == NULL)
 	{
-		//Print(L"Ntfs_inode_to_FileHandle -> INODE NULL!\n\r");
 		return EFI_VOLUME_CORRUPTED;
 	}
 
@@ -162,19 +161,16 @@ Ntfs_inode_to_FileHandle(
 
 	if ((inode->mrec->flags & MFT_RECORD_IS_DIRECTORY) != 0)
 	{
-		//Print(L"inode %x is directory.\n\r", inode->mft_no);
 		NewIFile->Type = FSW_EFI_FILE_TYPE_DIR;
 		NewIFile->Position = 0;
 	}
 	else
 	{
-		//Print(L"inode %x is file.\n\r", inode->mft_no);
 		NewIFile->Type = FSW_EFI_FILE_TYPE_FILE;
 		NewIFile->Position = 0;
 	}
 
 	*NewFileHandle = &NewIFile->Handle;
 
-	//Print(L"Allocation of NewFileHandle successful at address %x\n\r", NewIFile);
 	return EFI_SUCCESS;
 }

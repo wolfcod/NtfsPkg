@@ -282,8 +282,6 @@ Returns:
   // Others use FatDiskIo which utilizes a Cache.
   //
 
-  //Print(L"[Init]\n");
-
   DiskIo  = Volume->DiskIo;
   Status  = DiskIo->ReadDisk (DiskIo, Volume->MediaId, 0, sizeof (NtfsBs), &NtfsBs);
   
