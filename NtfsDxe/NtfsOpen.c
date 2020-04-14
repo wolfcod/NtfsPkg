@@ -123,7 +123,11 @@ Returns:
 	FileNameSize = StrLen(FileName);
 		//FileNameSize +=  (IFile->FileName != NULL) ? StrLen(IFile->FileName) : 0;
 
+#ifdef DISABLE_NEW_DEPRECATED_INTERFACES
+	UnicodeStrToAsciiStrS(FileName, TempPath, 260);	// local name
+#else
 	UnicodeStrToAsciiStr(FileName, TempPath);	// local name
+#endif
 	
 	FileNameSize++;
 	//Print(L"NtfsOpen(%a, %s)\n", IFile->FullPath, FileName);

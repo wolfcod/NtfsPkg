@@ -239,7 +239,12 @@ GetFileInfo (
 		}
 	
 		unicode = AllocateZeroPool((AsciiStrLen(rName) + 1) * sizeof(CHAR16));
+
+#ifdef DISABLE_NEW_DEPRECATED_INTERFACES
+		AsciiStrToUnicodeStrS(rName, unicode, (AsciiStrLen(rName) + 1));
+#else
 		AsciiStrToUnicodeStr(rName, unicode);
+#endif
 		ptrU = unicode;
 
 		if (*ptrU == L'\\')

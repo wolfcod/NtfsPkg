@@ -61,6 +61,7 @@ EFI_STATUS fsw_efi_dir_read(IN NTFS_IFILE *File,
 	ntfs_inode *inode;
 	UINTN RequiredSize;
 	ntfs_attr *data_na;
+	UINTN FileNameLength;
 
 	ZeroMem(&r, sizeof(struct _reent));
 	
@@ -120,7 +121,8 @@ EFI_STATUS fsw_efi_dir_read(IN NTFS_IFILE *File,
 		
 	}
 
-	RequiredSize = sizeof(EFI_FILE_INFO) + ((strlen(dir->current->name) + 1) * sizeof(CHAR16));
+	FileNameLength = strlen(dir->current->name) + 1;
+	RequiredSize = sizeof(EFI_FILE_INFO) + (FileNameLength * sizeof(CHAR16));
 	//Print(L" size: %d", RequiredSize);
 
 	if (*BufferSize < RequiredSize)
@@ -165,8 +167,11 @@ EFI_STATUS fsw_efi_dir_read(IN NTFS_IFILE *File,
 	if (inode->flags & FILE_ATTR_ARCHIVE)
 		FileInfo->Attribute |= EFI_FILE_ARCHIVE;
 
+#ifdef DISABLE_NEW_DEPRECATED_INTERFACES
+	AsciiStrToUnicodeStrS(dir->current->name, FileInfo->FileName, FileNameLength);
+#else
 	AsciiStrToUnicodeStr(dir->current->name, FileInfo->FileName);
-
+#endif
 	data_na = ntfs_attr_open(inode, AT_DATA, AT_UNNAMED, 0);
 
 	FileInfo->PhysicalSize = inode->allocated_size;
