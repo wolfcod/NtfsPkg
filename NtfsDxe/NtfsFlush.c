@@ -50,22 +50,14 @@ Returns:
 
 	IFile = IFILE_FROM_FHAND(FHand);
 
-	if (IFile->Volume->ReadOnly)
+	if (IFile->Volume->ReadOnly || IFile->ReadOnly)
 		return EFI_WRITE_PROTECTED;
 	
-	if (IFile->ReadOnly)
-		return EFI_ACCESS_DENIED;
-
-	if (IFile->Type == FSW_EFI_FILE_TYPE_FILE)
+	if (IFile->Type == FSW_EFI_FILE_TYPE_FILE || IFile->Type == FSW_EFI_FILE_TYPE_DIR)
 	{
-		ntfsSync(IFile->Volume->vd, IFile->inode);
-	}
-	else if (IFile->Type == FSW_EFI_FILE_TYPE_DIR)
-	{	// how sync a directory?
 		ntfsSync(IFile->Volume->vd, IFile->inode);
 	}
 
 	return EFI_SUCCESS;
-
 }
 
