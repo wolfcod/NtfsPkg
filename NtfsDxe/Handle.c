@@ -128,6 +128,24 @@ end:
 	return (UINTN) (Destination - Ptr);
 }
 
+
+VOID
+Ntfs_FileHandle_init(
+	EFI_FILE_PROTOCOL *Handle)
+{
+	Handle->Revision = 0x00010000;
+	Handle->Open = NtfsOpen;
+	Handle->Close = NtfsClose;
+	Handle->Delete = NtfsDelete;
+	Handle->Read = NtfsRead;
+	Handle->Write = NtfsWrite;
+	Handle->GetPosition = NtfsGetPosition;
+	Handle->SetPosition = NtfsSetPosition;
+	Handle->GetInfo = NtfsGetInfo;
+	Handle->SetInfo = NtfsSetInfo;
+	Handle->Flush = NtfsFlush;
+}
+
 EFI_STATUS 
 EFIAPI
 Ntfs_inode_to_FileHandle(
@@ -146,17 +164,8 @@ Ntfs_inode_to_FileHandle(
 	NewIFile = AllocateZeroPool(sizeof(NTFS_IFILE));
 	NewIFile->Signature = NTFS_IFILE_SIGNATURE;
 
-	NewIFile->Handle.Revision = 0x00010000;
-	NewIFile->Handle.Open = NtfsOpen;
-	NewIFile->Handle.Close = NtfsClose;
-	NewIFile->Handle.Delete = NtfsDelete;
-	NewIFile->Handle.Read = NtfsRead;
-	NewIFile->Handle.Write = NtfsWrite;
-	NewIFile->Handle.GetPosition = NtfsGetPosition;
-	NewIFile->Handle.SetPosition = NtfsSetPosition;
-	NewIFile->Handle.GetInfo = NtfsGetInfo;
-	NewIFile->Handle.SetInfo = NtfsSetInfo;
-	NewIFile->Handle.Flush = NtfsFlush;
+	Ntfs_FileHandle_init(&NewIFile->Handle);
+
 	NewIFile->inode = inode;	//
 	NewIFile->Position = -1;
 

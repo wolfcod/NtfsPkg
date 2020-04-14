@@ -22,13 +22,7 @@ Revision History
 #define _FATFILESYSTEM_H_
 
 #pragma pack(1)
-//
-// FAT info signature
-//
-#define FAT_INFO_SIGNATURE        0x41615252
-#define FAT_INFO_BEGIN_SIGNATURE  0x61417272
-#define FAT_INFO_END_SIGNATURE    0xAA550000
-//
+
 // FAT entry values
 //
 #define FAT_CLUSTER_SPECIAL_EXT       (-1 & (~0xF))
@@ -89,84 +83,11 @@ Revision History
 #define DELETE_ENTRY_MARK       0xE5
 #define EMPTY_ENTRY_MARK        0x00
 
-//
-// Volume dirty Mask
-//
-#define FAT16_DIRTY_MASK        0x7fff
-#define FAT32_DIRTY_MASK        0xf7ffffff
-//
 // internal flag
 //
 #define FAT_CASE_MIXED          0x01
 #define FAT_CASE_NAME_LOWER     0x08
 #define FAT_CASE_EXT_LOWER      0x10
-
-typedef struct {
-  UINT8   Ia32Jump[3];
-  CHAR8   OemId[8];
-  UINT16  SectorSize;
-  UINT8   SectorsPerCluster;
-  UINT16  ReservedSectors;
-  UINT8   NumFats;
-  UINT16  RootEntries;          // < FAT32, root dir is fixed size
-  UINT16  Sectors;
-  UINT8   Media;
-  UINT16  SectorsPerFat;        // < FAT32
-  UINT16  SectorsPerTrack;      // (ignored)
-  UINT16  Heads;                // (ignored)
-  UINT32  HiddenSectors;        // (ignored)
-  UINT32  LargeSectors;         // Used if Sectors==0
-} FAT_BOOT_SECTOR_BASIC;
-
-typedef struct {
-  UINT8 PhysicalDriveNumber;    // (ignored)
-  UINT8 CurrentHead;            // holds boot_sector_dirty bit
-  UINT8 Signature;              // (ignored)
-  CHAR8 Id[4];
-  CHAR8 FatLabel[11];
-  CHAR8 SystemId[8];
-} FAT_BOOT_SECTOR_EXT;
-
-typedef struct {
-  UINT32  LargeSectorsPerFat;   // FAT32
-  UINT16  ExtendedFlags;        // FAT32 (ignored)
-  UINT16  FsVersion;            // FAT32 (ignored)
-  UINT32  RootDirFirstCluster;  // FAT32
-  UINT16  FsInfoSector;         // FAT32
-  UINT16  BackupBootSector;     // FAT32
-  UINT8   Reserved[12];         // FAT32 (ignored)
-  UINT8   PhysicalDriveNumber;  // (ignored)
-  UINT8   CurrentHead;          // holds boot_sector_dirty bit
-  UINT8   Signature;            // (ignored)
-  CHAR8   Id[4];
-  CHAR8   FatLabel[11];
-  CHAR8   SystemId[8];
-} FAT32_BOOT_SECTOR_EXT;
-
-typedef struct {
-  FAT_BOOT_SECTOR_BASIC   FatBsb;
-  union {
-    FAT_BOOT_SECTOR_EXT   FatBse;
-    FAT32_BOOT_SECTOR_EXT Fat32Bse;
-  } FatBse;
-} FAT_BOOT_SECTOR;
-
-//
-// FAT Info Structure
-//
-typedef struct {
-  UINT32  ClusterCount;
-  UINT32  NextCluster;
-} FAT_FREE_INFO;
-
-typedef struct {
-  UINT32        Signature;
-  UINT8         ExtraBootCode[480];
-  UINT32        InfoBeginSignature;
-  FAT_FREE_INFO FreeInfo;
-  UINT8         Reserved[12];
-  UINT32        InfoEndSignature;
-} FAT_INFO_SECTOR;
 
 //
 // Directory Entry
@@ -201,17 +122,6 @@ typedef struct {
   UINT16        FileCluster;
   UINT32        FileSize;
 } NTFS_DIRECTORY_ENTRY;
-
-typedef struct {
-  UINT8   Ordinal;
-  CHAR8   Name1[10];                // (Really 5 chars, but not WCHAR aligned)
-  UINT8   Attributes;
-  UINT8   Type;
-  UINT8   Checksum;
-  CHAR16  Name2[6];
-  UINT16  MustBeZero;
-  CHAR16  Name3[2];
-} FAT_DIRECTORY_LFN;
 
 #pragma pack()
 
