@@ -88,6 +88,11 @@ int ntfs_log_redirect(const char *function, const char *file, int line,
 /* Macros to simplify logging.  One for each level defined above.
  * Note, ntfs_log_debug/trace have effect only if DEBUG is defined.
  */
+
+/* By default debug and trace messages are compiled into the program,
+ * but not displayed.
+ */
+#ifdef DEBUG
 #define ntfs_log_critical(FORMAT, ...) ntfs_log_redirect(__FUNCTION__,__FILE__,__LINE__,NTFS_LOG_LEVEL_CRITICAL,NULL,FORMAT,__VA_ARGS__)
 #define ntfs_log_error(FORMAT, ...) ntfs_log_redirect(__FUNCTION__,__FILE__,__LINE__,NTFS_LOG_LEVEL_ERROR,NULL,FORMAT,__VA_ARGS__)
 #define ntfs_log_info(FORMAT, ...) ntfs_log_redirect(__FUNCTION__,__FILE__,__LINE__,NTFS_LOG_LEVEL_INFO,NULL,FORMAT,__VA_ARGS__)
@@ -97,21 +102,25 @@ int ntfs_log_redirect(const char *function, const char *file, int line,
 #define ntfs_log_verbose(FORMAT, ...) ntfs_log_redirect(__FUNCTION__,__FILE__,__LINE__,NTFS_LOG_LEVEL_VERBOSE,NULL,FORMAT,__VA_ARGS__)
 #define ntfs_log_warning(FORMAT, ...) ntfs_log_redirect(__FUNCTION__,__FILE__,__LINE__,NTFS_LOG_LEVEL_WARNING,NULL,FORMAT,__VA_ARGS__)
 
-/* By default debug and trace messages are compiled into the program,
- * but not displayed.
- */
-#ifdef DEBUG
 #define ntfs_log_debug(FORMAT, ...) ntfs_log_redirect(__FUNCTION__,__FILE__,__LINE__,NTFS_LOG_LEVEL_DEBUG,NULL,FORMAT,__VA_ARGS__)
 #define ntfs_log_trace(FORMAT, ...) ntfs_log_redirect(__FUNCTION__,__FILE__,__LINE__,NTFS_LOG_LEVEL_TRACE,NULL,FORMAT,__VA_ARGS__)
 #define ntfs_log_enter(FORMAT, ...) ntfs_log_redirect(__FUNCTION__,__FILE__,__LINE__,NTFS_LOG_LEVEL_ENTER,NULL,FORMAT,__VA_ARGS__)
 #define ntfs_log_leave(FORMAT, ...) ntfs_log_redirect(__FUNCTION__,__FILE__,__LINE__,NTFS_LOG_LEVEL_LEAVE,NULL,FORMAT,__VA_ARGS__)
 #else
-//#define ntfs_log_debug(FORMAT, ...)do {} while (0) //
-#define ntfs_log_debug(FORMAT, ...) do {} while (0) ////AsciiPrint(FORMAT,__VA_ARGS__)
-#define ntfs_log_trace(FORMAT, ...) do {} while (0) //AsciiPrint(FORMAT,__VA_ARGS__)
-#define ntfs_log_enter(FORMAT, ...) do {} while (0) //AsciiPrint(FORMAT,__VA_ARGS__)
-#define ntfs_log_leave(FORMAT, ...) do {} while (0) //AsciiPrint(FORMAT,__VA_ARGS__)
-#define ntfs_log_error(FORMAT, ...) do {} while (0) //AsciiPrint(FORMAT,__VA_ARGS__)
+#define ntfs_log_debug(FORMAT, ...) do {} while (0)
+#define ntfs_log_trace(FORMAT, ...) do {} while (0)
+#define ntfs_log_enter(FORMAT, ...) do {} while (0)
+#define ntfs_log_leave(FORMAT, ...) do {} while (0)
+
+#define ntfs_log_critical(FORMAT, ...) do {} while (0)
+#define ntfs_log_error(FORMAT, ...) do {} while (0)
+#define ntfs_log_info(FORMAT, ...) do {} while (0)
+#define ntfs_log_perror(FORMAT, ...) do {} while (0)
+#define ntfs_log_progress(FORMAT, ...) do {} while (0)
+#define ntfs_log_quiet(FORMAT, ...) do {} while (0)
+#define ntfs_log_verbose(FORMAT, ...) do {} while (0)
+#define ntfs_log_warning(FORMAT, ...) do {} while (0)
+
 #endif /* DEBUG */
 
 void ntfs_log_early_error(const char *format, ...);
