@@ -269,19 +269,15 @@ GetFileInfo (
 EFI_STATUS
 SetFileInfo (
   IN NTFS_IFILE *IFile,
-  IN UINTN           *BufferSize,
-  EFI_FILE_INFO		 *Buffer
+  IN OUT UINTN           *BufferSize,
+  OUT EFI_FILE_INFO		 *Buffer
   )
-
 {
-	/* ignore action */
-	return EFI_SUCCESS;
-
+	return EFI_UNSUPPORTED;
 }
-
 EFI_STATUS
 EFIAPI
-NtfsGetInfo (
+NtfsGetInfoFile (
   IN     EFI_FILE_PROTOCOL   *FHand,
   IN     EFI_GUID            *Type,
   IN OUT UINTN               *BufferSize,
@@ -338,7 +334,7 @@ Returns:
 
 EFI_STATUS
 EFIAPI
-NtfsSetInfo (
+NtfsSetInfoFile (
   IN EFI_FILE_PROTOCOL  *FHand,
   IN EFI_GUID           *Type,
   IN UINTN              BufferSize,

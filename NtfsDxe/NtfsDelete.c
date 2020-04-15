@@ -22,7 +22,7 @@ Revision History
 
 EFI_STATUS
 EFIAPI
-NtfsDelete (
+NtfsDeleteFile (
   IN EFI_FILE_PROTOCOL  *FHand
   )
 
@@ -54,16 +54,15 @@ Returns:
 	// Default error
 	Status = EFI_WARN_DELETE_FAILURE;
 	
-	if (IFile->inode == NULL)	// inode not valid.. release mem and exit
-		goto free;
-
-	if (IFile->FileName == NULL)
+	// check IFile integrity
+	if (IFile->inode == NULL || 
+		IFile->FileName == NULL) 	// inode not valid.. release mem and exit
 		goto free;
 
 	ni = IFile->inode;
 	dir_ni = IFile->dir_ni;
 
-	if (ni->mft_no < FILE_first_user)	// cannot remove users file!
+	if (ni->mft_no < FILE_first_user)	// cannot remove system file!
 		goto free;
 
 	if (ntfsUnlink(IFile->Volume->vd, IFile->FullPath) != 0)

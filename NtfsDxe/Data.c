@@ -33,14 +33,14 @@ EFI_LOCK NtfsFsLock = EFI_INITIALIZE_LOCK_VARIABLE(TPL_CALLBACK);
 //
 EFI_FILE_PROTOCOL               NtfsFileInterface = {
   EFI_FILE_PROTOCOL_REVISION,
-  NtfsOpen,
-  NtfsClose,
-  NtfsDelete,
-  NtfsRead,
-  NtfsWrite,
-  NtfsGetPosition,
-  NtfsSetPosition,
-  NtfsGetInfo,
-  NtfsSetInfo,
-  NtfsFlush
+  NtfsOpenFile,
+  NtfsCloseFile,
+  NtfsDeleteFile,
+  NtfsReadFile,
+  NtfsWriteFile,
+  NtfsGetPositionFile,
+  NtfsSetPositionFile,
+  NtfsGetInfoFile,
+  NtfsSetInfoFile,
+  NtfsFlushFile
 };

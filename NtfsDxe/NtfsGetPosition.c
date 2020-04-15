@@ -25,7 +25,7 @@ Revision History
 
 EFI_STATUS
 EFIAPI
-NtfsGetPosition (
+NtfsGetPositionFile (
   IN  EFI_FILE_PROTOCOL *FHand,
   OUT UINT64            *Position
   )

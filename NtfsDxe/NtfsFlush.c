@@ -24,7 +24,7 @@ Revision History
 
 EFI_STATUS
 EFIAPI
-NtfsFlush (
+NtfsFlushFile (
   IN EFI_FILE_PROTOCOL  *FHand
   )
 /*++

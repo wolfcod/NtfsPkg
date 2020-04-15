@@ -481,7 +481,7 @@ cleanup:
         free(uname);
 
     if(dir)
-        ntfs_free(dir);
+        free(dir);
 
     // Unlock
     ntfsUnlock(vd);

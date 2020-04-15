@@ -25,7 +25,7 @@ Revision History
 
 EFI_STATUS
 EFIAPI
-NtfsWrite (
+NtfsWriteFile (
   IN     EFI_FILE_PROTOCOL  *FHand,
   IN OUT UINTN              *BufferSize,
   IN     VOID               *Buffer

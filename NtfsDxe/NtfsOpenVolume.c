@@ -58,14 +58,14 @@ Returns:
 
 	if (Volume->root == NULL)
 	{	// open root one time!
-		//inode = ntfs_inode_open(Volume->vd->vol, FILE_root);	// access to root!
-		//Volume->root = inode;
+		Volume->root = ntfs_inode_open(Volume->vd->vol, FILE_root);
 	}
-
-	inode = ntfs_inode_open(Volume->vd->vol, FILE_root);	// access to root!
+	
+	inode = Volume->root;
 	
 	if (inode == NULL)
 	{
+		Volume->root = NULL;
 		return EFI_VOLUME_CORRUPTED;
 	}
 

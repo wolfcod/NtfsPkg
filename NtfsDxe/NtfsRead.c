@@ -25,7 +25,7 @@ Revision History
 
 EFI_STATUS
 EFIAPI
-NtfsRead (
+NtfsReadFile (
   IN     EFI_FILE_PROTOCOL  *FHand,
   IN OUT UINTN              *BufferSize,
      OUT VOID               *Buffer
@@ -74,7 +74,7 @@ Returns:
 	}
 	else if (IFile->Type == FSW_EFI_FILE_TYPE_DIR)
 	{	// unimplemented!
-		Status = fsw_efi_dir_read(IFile, BufferSize, Buffer);
+		Status = NtfsReadDirectory(IFile, BufferSize, Buffer);
 		return Status;
 	}
 	else

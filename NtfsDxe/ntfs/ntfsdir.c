@@ -515,26 +515,8 @@ ntfs_dir_state *ntfs_diropen_r (struct _reent *r, ntfs_dir_state *dirState, cons
 
     ntfs_log_trace("dirState %p, path %s\n", dirState, path);
 
-
-    // Get the volume descriptor for this path
-    /*dir->vd = ntfsGetVolume(path);
-    if (!dir->vd) {
-		Print(L"ntfs_diropen_r failed to get volume\n\r");
-        r->_errno = ENODEV;
-        return NULL;
-    }*/
-
     // Lock
     ntfsLock(dir->vd);
-
-    // Find the directory
-	/* cod -> dir->ni setting in NtfsOpen */
-	//dir->ni = ntfsOpenEntry(dir->vd, path);
-	//if (!dir->ni) {
-	//	ntfsUnlock(dir->vd);
-	//	r->_errno = ENOENT;
-	//	return NULL;
-	//}
 
     // Ensure that this directory is indeed a directory
 	if (!(dir->ni->mrec->flags && MFT_RECORD_IS_DIRECTORY)) {

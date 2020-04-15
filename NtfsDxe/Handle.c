@@ -120,16 +120,16 @@ Ntfs_FileHandle_init(
 	EFI_FILE_PROTOCOL *Handle)
 {
 	Handle->Revision = 0x00010000;
-	Handle->Open = NtfsOpen;
-	Handle->Close = NtfsClose;
-	Handle->Delete = NtfsDelete;
-	Handle->Read = NtfsRead;
-	Handle->Write = NtfsWrite;
-	Handle->GetPosition = NtfsGetPosition;
-	Handle->SetPosition = NtfsSetPosition;
-	Handle->GetInfo = NtfsGetInfo;
-	Handle->SetInfo = NtfsSetInfo;
-	Handle->Flush = NtfsFlush;
+	Handle->Open = NtfsOpenFile;
+	Handle->Close = NtfsCloseFile;
+	Handle->Delete = NtfsDeleteFile;
+	Handle->Read = NtfsReadFile;
+	Handle->Write = NtfsWriteFile;
+	Handle->GetPosition = NtfsGetPositionFile;
+	Handle->SetPosition = NtfsSetPositionFile;
+	Handle->GetInfo = NtfsGetInfoFile;
+	Handle->SetInfo = NtfsSetInfoFile;
+	Handle->Flush = NtfsFlushFile;
 }
 
 EFI_STATUS 

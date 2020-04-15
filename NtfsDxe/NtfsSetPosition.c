@@ -25,7 +25,7 @@ Revision History
 
 EFI_STATUS
 EFIAPI
-NtfsSetPosition (
+NtfsSetPositionFile (
   IN EFI_FILE_PROTOCOL  *FHand,
   IN UINT64             Position
   )

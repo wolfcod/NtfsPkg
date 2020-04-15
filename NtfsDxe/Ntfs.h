@@ -335,7 +335,7 @@ typedef struct _NTFS_VOLUME {
 //
 EFI_STATUS
 EFIAPI
-NtfsOpen (
+NtfsOpenFile (
   IN  EFI_FILE_PROTOCOL *FHand,
   OUT EFI_FILE_PROTOCOL **NewHandle,
   IN  CHAR16            *FileName,
@@ -370,7 +370,7 @@ Returns:
 
 EFI_STATUS
 EFIAPI
-NtfsGetPosition (
+NtfsGetPositionFile (
   IN  EFI_FILE_PROTOCOL *FHand,
   OUT UINT64            *Position
   )
@@ -396,7 +396,7 @@ Returns:
 
 EFI_STATUS
 EFIAPI
-NtfsGetInfo (
+NtfsGetInfoFile (
   IN     EFI_FILE_PROTOCOL      *FHand,
   IN     EFI_GUID               *Type,
   IN OUT UINTN                  *BufferSize,
@@ -425,7 +425,7 @@ Returns:
 
 EFI_STATUS
 EFIAPI
-NtfsSetInfo (
+NtfsSetInfoFile (
   IN EFI_FILE_PROTOCOL  *FHand,
   IN EFI_GUID           *Type,
   IN UINTN              BufferSize,
@@ -454,7 +454,7 @@ Returns:
 
 EFI_STATUS
 EFIAPI
-NtfsFlush (
+NtfsFlushFile (
   IN EFI_FILE_PROTOCOL  *FHand
   )
 /*++
@@ -480,7 +480,7 @@ Returns:
 
 EFI_STATUS
 EFIAPI
-NtfsClose (
+NtfsCloseFile (
   IN EFI_FILE_PROTOCOL  *FHand
   )
 /*++
@@ -502,7 +502,7 @@ Returns:
 
 EFI_STATUS
 EFIAPI
-NtfsDelete (
+NtfsDeleteFile (
   IN EFI_FILE_PROTOCOL  *FHand
   )
 /*++
@@ -525,7 +525,7 @@ Returns:
 
 EFI_STATUS
 EFIAPI
-NtfsSetPosition (
+NtfsSetPositionFile (
   IN EFI_FILE_PROTOCOL  *FHand,
   IN UINT64             Position
   )
@@ -551,7 +551,7 @@ Returns:
 
 EFI_STATUS
 EFIAPI
-NtfsRead (
+NtfsReadFile (
   IN     EFI_FILE_PROTOCOL    *FHand,
   IN OUT UINTN                *BufferSize,
      OUT VOID                 *Buffer
@@ -580,7 +580,7 @@ Returns:
 
 EFI_STATUS
 EFIAPI
-NtfsWrite (
+NtfsWriteFile (
   IN     EFI_FILE_PROTOCOL      *FHand,
   IN OUT UINTN                  *BufferSize,
   IN     VOID                   *Buffer
@@ -624,12 +624,9 @@ NtfsAllocateVolume (
   IN  EFI_BLOCK_IO_PROTOCOL     *BlockIo
   );
 
-EFI_STATUS fsw_efi_dir_read(IN NTFS_IFILE *File,
+EFI_STATUS NtfsReadDirectory(IN NTFS_IFILE *File,
                             IN OUT UINTN *BufferSize,
                             OUT EFI_FILE_INFO *FileInfo);
-
-// added for "Debug"
-
 //
 // Misc.c
 //

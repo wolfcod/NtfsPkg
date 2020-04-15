@@ -22,10 +22,9 @@ Revision History
 #include "ntfs/ntfsdir.h"
 #include "ntfs/ntfsfile.h"
 
-
 EFI_STATUS
 EFIAPI
-NtfsClose (
+NtfsCloseFile (
   IN EFI_FILE_PROTOCOL  *FHand
   )
 /*++
@@ -66,11 +65,6 @@ Returns:
 		Status = EFI_INVALID_PARAMETER;
 
 	Ntfs_Deallocate(IFile);
-	if (IFile->state.file != NULL)
-	{	// free filestate object or dirstate object
-		FreePool(IFile->state.file);
-		IFile->state.file = NULL;
-	}
 
 	if (Status == EFI_SUCCESS)
 		FreePool(IFile);

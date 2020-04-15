@@ -49,7 +49,7 @@ void ntfs_to_efitime(EFI_TIME *EfiTime, ntfs_time ntfstime)
 	fsw_efi_decode_time(EfiTime, spec.tv_sec);
 }
 
-EFI_STATUS fsw_efi_dir_read(IN NTFS_IFILE *File,
+EFI_STATUS NtfsReadDirectory(IN NTFS_IFILE *File,
                             IN OUT UINTN *BufferSize,
                             OUT EFI_FILE_INFO *FileInfo)
 {

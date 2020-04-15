@@ -65,7 +65,7 @@ int ReverseLookup(NTFS_VOLUME *Volume, CHAR16 *FileName, CHAR* FileName)
 
 EFI_STATUS
 EFIAPI
-NtfsOpen (
+NtfsOpenFile (
   IN  EFI_FILE_PROTOCOL   *FHand,
   OUT EFI_FILE_PROTOCOL   **NewHandle,
   IN  CHAR16              *FileName,
@@ -103,7 +103,7 @@ Returns:
 	NTFS_VOLUME *Volume;
 	struct _reent r;
 	CHAR8	AsciiFileName[260], TempPath[260];
-	int flags, mode, FileNameSize, i;
+	int flags, mode, FileNameSize;
 	CHAR8	*LastSeparator;
 
 	//
@@ -163,20 +163,17 @@ Returns:
 		IFile->Volume->vd->cwd_ni = IFile->inode;	// set root parent
 	}
 
-	if ((OpenMode & EFI_FILE_MODE_CREATE) && (Attributes & EFI_FILE_DIRECTORY))
-	{	// Create a directory!
-		inode = ntfsCreate(IFile->Volume->vd, AsciiFileName, S_IFDIR, NULL);
-	}
-	else if ((OpenMode & EFI_FILE_MODE_CREATE))
-	{	// Create a file or open if exists...
-		inode = ntfsCreate(IFile->Volume->vd, AsciiFileName, S_IFREG, NULL);
-		if (inode == NULL)
-		{	// file exists.. try to open!
+	if ((OpenMode & EFI_FILE_MODE_CREATE))
+	{	// Create a directory or a file...
+		unsigned int type = (Attributes & EFI_FILE_DIRECTORY) ? S_IFDIR : S_IFREG;
+		inode = ntfsCreate(IFile->Volume->vd, AsciiFileName, type, NULL);
+
+		if (inode == NULL && type == S_IFREG) { // file exists.. try to open!
 			inode = ntfsOpenEntry(IFile->Volume->vd, AsciiFileName);
 		}
 	}
-	else if ((AsciiStrCmp(AsciiFileName, "\\" ) == 0) || (AsciiStrCmp(AsciiFileName, "/") == 0) || (AsciiStrCmp(AsciiFileName, "") == 0) ||  (AsciiStrCmp(AsciiFileName, L".") == 0))
-	{
+	else if ((AsciiStrCmp(AsciiFileName, "\\" ) == 0) || (AsciiStrCmp(AsciiFileName, "/") == 0) || (AsciiStrCmp(AsciiFileName, "") == 0) ||  (AsciiStrCmp(AsciiFileName, ".") == 0))
+	{	// ? we have a pointer to root! why we need to reopen?
 		inode = ntfs_inode_open(Volume->vd->vol, FILE_root);	// access to root!
 	}
 	else
