@@ -61,29 +61,36 @@ Returns:
 
 	IFile = IFILE_FROM_FHAND(FHand);	// cast from "EFI" to FHAND
 
+	Status = EFI_DEVICE_ERROR;
 	if (IFile->Type == FSW_EFI_FILE_TYPE_FILE)
 	{
+#ifdef _NTFS_READONLY
+		Status = EFI_WRITE_PROTECTED;
+		*BufferSize = 0;
+#else
 		ZeroMem(&r, sizeof(struct _reent));
 		rbytes = ntfs_write_r(&r, IFile->state.file, Buffer, *BufferSize);
-
+		
 		if (rbytes >= 0)
 		{
 			*BufferSize = rbytes;
-			return EFI_SUCCESS;
+			Status = EFI_SUCCESS;
 		}
-			
-		*BufferSize = 0;
-		return EFI_DEVICE_ERROR;
+		else
+		{
+			*BufferSize = 0;
+			//Status = EFI_DEVICE_ERROR;
+		}
+#endif
 	}
 	else if (IFile->Type == FSW_EFI_FILE_TYPE_DIR)
 	{	// unimplemented!
 		Status = EFI_ACCESS_DENIED;
-		return Status;
 	}
 	else
 	{	// what's?
+		Status = EFI_UNSUPPORTED;
 	}
-	return EFI_DEVICE_ERROR;
-
+	return Status;
 }
 

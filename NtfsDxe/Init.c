@@ -109,7 +109,11 @@ Returns:
   Volume->DiskIo                      = DiskIo;
   Volume->BlockIo                     = BlockIo;
   Volume->MediaId                     = BlockIo->Media->MediaId;
+#ifdef _NTFS_READONLY
+  Volume->ReadOnly                    = TRUE;
+#else
   Volume->ReadOnly                    = BlockIo->Media->ReadOnly;
+#endif
   Volume->VolumeInterface.Revision    = EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_REVISION;
   Volume->VolumeInterface.OpenVolume  = NtfsOpenVolume;
 
@@ -127,7 +131,11 @@ Returns:
 
   NtfsCreateVolumeName(Volume->RootFileString, (UINTN) BlockIo);
   
-  Volume->vd = ntfsMount(Volume->RootFileString, Volume, 0, 0, 0, 0, 0);	// 
+  u32 flags = 0;
+#ifdef _NTFS_READONLY
+  flags |= NTFS_READ_ONLY;
+#endif
+  Volume->vd = ntfsMount(Volume->RootFileString, Volume, 0, 0, 0, 0, flags);	// 
   Volume->vol = Volume->vd->vol;
 
   if (Volume->vd == NULL)
