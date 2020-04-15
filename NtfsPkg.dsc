@@ -9,10 +9,10 @@
 
 [Defines]
   PLATFORM_NAME                  = Ntfs
-  PLATFORM_GUID                  = 25b55dbc-9d0b-4a32-80da-46e1273d622c
+  PLATFORM_GUID                  = a4314398-99ce-427d-a9d6-9d8f53ea443d
   PLATFORM_VERSION               = 0.1
   DSC_SPECIFICATION              = 0x00010005
-  SUPPORTED_ARCHITECTURES        = IA32|IPF|X64|ARM|AARCH64
+  SUPPORTED_ARCHITECTURES        = IA32|X64
   OUTPUT_DIRECTORY               = Build/NtfsPkg
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT

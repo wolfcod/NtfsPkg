@@ -15,7 +15,7 @@
 [Defines]
   INF_VERSION                    = 0x00010005
   BASE_NAME                      = Ntfs
-  FILE_GUID                      = f50248a9-2f4d-4de9-86ae-bda84d07a41c
+  FILE_GUID                      = 0233c60e-f1fe-4f32-8fdb-62c554457933
   MODULE_TYPE                    = UEFI_DRIVER
   VERSION_STRING                 = 1.0
 
