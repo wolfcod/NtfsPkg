@@ -19,5 +19,5 @@ build -p YourPlatformProject\YourPlatformProjectArch.dsc -a [IA32|X64] -m NtfsPk
 ```
 
 Note: The project was compiled with Microsoft Visual Studio C++ 2008, 2010 and 2019. Build from Developer Prompt.
-Note 2: You can add -D _NTFS_READONLY to build command line, to avoid any kind of write operatins on disk.. The symbol
+Note 2: You can add -D _NTFS_READONLY to build command line, to avoid any kind of write operations on disk.. The symbol
 disable ntfs_write_xx operations on disk.
