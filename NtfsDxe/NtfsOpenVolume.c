@@ -21,6 +21,18 @@ Revision History
 #include "Ntfs.h"
 #include "ntfs/ntfsdir.h"
 
+static ntfs_inode* _open_root(NTFS_VOLUME *vol)
+/**++
+ Helper function for NTFS_VOLUME
+ **/
+{
+	if (vol->root != NULL)
+		return vol->root;
+	
+	vol->root = ntfs_inode_open(vol->vd->vol, FILE_root);
+	return vol->root;
+}
+
 EFI_STATUS
 EFIAPI
 NtfsOpenVolume (
@@ -56,16 +68,10 @@ Returns:
 
 	NtfsAcquireLock  ();
 
-	if (Volume->root == NULL)
-	{	// open root one time!
-		Volume->root = ntfs_inode_open(Volume->vd->vol, FILE_root);
-	}
-	
-	inode = Volume->root;
-	
+	inode = _open_root(Volume); // try to open volume or return current inode..
+
 	if (inode == NULL)
 	{
-		Volume->root = NULL;
 		return EFI_VOLUME_CORRUPTED;
 	}
 
