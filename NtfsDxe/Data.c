@@ -1,18 +1,11 @@
 /*++
-
-Copyright (c) 2005 - 2009, Intel Corporation. All rights reserved.<BR>
-This program and the accompanying materials
-are licensed and made available under the terms and conditions of the Software
-License Agreement which accompanies this distribution.
-
-
 Module Name:
 
   Data.c
 
 Abstract:
 
-  Global data in the FAT Filesystem driver
+  Global data in the NTFS Filesystem driver
 
 Revision History
 

@@ -1,11 +1,4 @@
 /*++
-
-Copyright (c) 2005 - 2009, Intel Corporation. All rights reserved.<BR>
-This program and the accompanying materials
-are licensed and made available under the terms and conditions of the Software
-License Agreement which accompanies this distribution.
-
-
 Module Name:
 
   open.c
@@ -23,45 +16,6 @@ Revision History
 #include "Ntfs.h"
 #include "ntfs/ntfsdir.h"
 #include "ntfs/ntfsfile.h"
-
-/*static CHAR16 whd = L"0123456789ABCDEF";
-
-int ReverseLookup(NTFS_VOLUME *Volume, CHAR16 *FileName, CHAR* FileName)
-{
-	MFT_REF mft;
-	int pos = 0;
-	CHAR16 *ptr;
-	CHAR16 digit;
-	UINT8 bcd;
-
-	ptr = FileName;
-
-	while(*ptr != 0x00)
-		ptr++;
-
-	mft = 0;
-	ptr--;	// move on latest char16
-	while(ptr >= FileName)
-	{	// reconstruct path..
-		digit = *ptr;
-
-		if (digit >= L'0' && digit <= L'9')
-			digit = digit - L'0';
-
-		if (digit >= 'A' && digit <= 'F')
-			digit = (digit - L'A' + 10);
-
-		bcd = digit;
-
-		mft = mft & bcd;
-		mft = mft << 4;
-	}
-
-	// now we have INODE!
-	ntfs_inode *ni = ntfs_inode_open(Volume->vol, mft);
-
-	ntfs_inode_get
-}*/
 
 EFI_STATUS
 EFIAPI

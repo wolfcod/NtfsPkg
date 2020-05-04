@@ -1,4 +1,13 @@
-//#include "types.h"
+/*++
+Module Name:
+
+  libc.c
+
+Abstract:
+
+  A subset of functions not available on EDK platform, but available on libc
+
+--*/
 
 #include "Ntfs.h"
 
