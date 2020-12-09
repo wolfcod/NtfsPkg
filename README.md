@@ -1,6 +1,6 @@
 ## NTFS Driver (read/write)
 
-This project is an UEFI Driver extensions based on source code leaked from ]HackingTeam[
+This project is an UEFI Driver extensions based on source code leaked from `]HackingTeam[`
 The idea is to refactoring the code, upgrade to EDK II and to support new compilers;
 
 ## Instruction
