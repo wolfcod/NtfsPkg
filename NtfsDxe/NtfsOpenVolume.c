@@ -46,7 +46,7 @@ Arguments:
 Returns:
 
   EFI_OUT_OF_RESOURCES  - Can not allocate the memory.
-  EFI_VOLUME_CORRUPTED  - The FAT type is error.
+  EFI_VOLUME_CORRUPTED  - The NTFS type is error.
   EFI_SUCCESS           - Open the volume successfully.
 
 --*/

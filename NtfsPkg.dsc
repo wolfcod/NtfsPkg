@@ -64,7 +64,7 @@
 #       It is the FDF file that contains information on combining binary files into firmware
 #       volume images, whose concept is beyond UEFI and is described in PI specification.
 #       Binary modules do not need to be listed in this section, as they should be
-#       specified in the FDF file. For example: Shell binary (Shell_Full.efi), FAT binary (Fat.efi),
+#       specified in the FDF file. For example: Shell binary (Shell_Full.efi), Ntfs binary (NtfsDxe.efi),
 #       Logo (Logo.bmp), and etc.
 #       There may also be modules listed in this section that are not required in the FDF file,
 #       When a module listed here is excluded from FDF file, then UEFI-compliant binary will be

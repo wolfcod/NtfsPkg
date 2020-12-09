@@ -63,7 +63,7 @@ NtfsAllocateVolume (
 
 Routine Description:
 
-  Allocates volume structure, detects FAT file system, installs protocol,
+  Allocates volume structure, detects NTFS file system, installs protocol,
   and initialize cache.
 
 Arguments:
@@ -212,7 +212,7 @@ Returns:
   //
   // Acquire the lock.
   // If the caller has already acquired the lock (which
-  // means we are in the process of some Fat operation),
+  // means we are in the process of some Ntfs operation),
   // we can not acquire again.
   //
   Status = NtfsAcquireLockOrFail ();
@@ -235,11 +235,11 @@ Returns:
   //
   // Release the lock.
   // If locked by me, this means DriverBindingStop is NOT
-  // called within an on-going Fat operation, so we should
+  // called within an on-going Ntfs operation, so we should
   // take responsibility to cleanup and free the volume.
   // Otherwise, the DriverBindingStop is called within an on-going
-  // Fat operation, we shouldn't check reference, so just let outer
-  // FatCleanupVolume do the task.
+  // Ntfs operation, we shouldn't check reference, so just let outer
+  // NtfsCleanupVolume do the task.
   //
   if (LockedByMe) {
 	  NtfsReleaseLock();
@@ -278,11 +278,8 @@ Returns:
   NTFS_BOOT_SECTOR		NtfsBs;
 
   //
-  // Read the FAT_BOOT_SECTOR BPB info
-  // This is the only part of FAT code that uses parent DiskIo,
-  // Others use FatDiskIo which utilizes a Cache.
-  //
-
+  // Read the NTFS_BOOT_SECTOR info
+  
   DiskIo  = Volume->DiskIo;
   Status  = DiskIo->ReadDisk (DiskIo, Volume->MediaId, 0, sizeof (NtfsBs), &NtfsBs);
   

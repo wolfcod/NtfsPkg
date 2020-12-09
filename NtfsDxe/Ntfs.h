@@ -8,11 +8,11 @@ License Agreement which accompanies this distribution.
 
 Module Name:
 
-  Fat.h
+  Ntfs.h
 
 Abstract:
 
-  Main header file for EFI FAT file system driver
+  Main header file for EFI NTFS file system driver
 
 Revision History
 
@@ -47,7 +47,7 @@ Revision History
 #include "ntfs/ntfsinternal.h"
 
 //
-// The FAT signature
+// The NTFS signature
 //
 #define NTFS_VOLUME_SIGNATURE         SIGNATURE_32 ('n', 't', 'f', 'v')
 #define NTFS_IFILE_SIGNATURE          SIGNATURE_32 ('n', 't', 'f', 'i')
@@ -85,26 +85,6 @@ Revision History
 #define IS_LEAP_YEAR(a)                   (((a) % 4 == 0) && (((a) % 100 != 0) || ((a) % 400 == 0)))
 
 //
-// Minimum fat page size is 8K, maximum fat page alignment is 32K
-// Minimum data page size is 8K, maximum fat page alignment is 64K
-//
-#define FAT_FATCACHE_PAGE_MIN_ALIGNMENT   13
-#define FAT_FATCACHE_PAGE_MAX_ALIGNMENT   15
-#define FAT_DATACACHE_PAGE_MIN_ALIGNMENT  13
-#define FAT_DATACACHE_PAGE_MAX_ALIGNMENT  16
-#define FAT_DATACACHE_GROUP_COUNT         64
-#define FAT_FATCACHE_GROUP_MIN_COUNT      1
-#define FAT_FATCACHE_GROUP_MAX_COUNT      16
-
-//
-// Used in 8.3 generation algorithm
-//
-#define MAX_SPEC_RETRY          4
-#define SPEC_BASE_TAG_LEN       6
-#define HASH_BASE_TAG_LEN       2
-#define HASH_VALUE_TAG_LEN      (SPEC_BASE_TAG_LEN - HASH_BASE_TAG_LEN)
-
-//
 // Path name separator is back slash
 //
 #define PATH_NAME_SEPARATOR     L'\\'
@@ -112,64 +92,10 @@ Revision History
 
 #define EFI_PATH_STRING_LENGTH  260
 #define EFI_FILE_STRING_LENGTH  255
-#define FAT_MAX_ALLOCATE_SIZE   0xA00000
 #define LC_ISO_639_2_ENTRY_SIZE 3
 #define MAX_LANG_CODE_SIZE      100
 
-#define FAT_MAX_DIR_CACHE_COUNT 8
-#define FAT_MAX_DIRENTRY_COUNT  0xFFFF
 typedef CHAR8                   LC_ISO_639_2;
-
-//
-// The fat types we support
-//
-typedef enum {
-  FAT12,
-  FAT16,
-  FAT32,
-  FatUndefined
-} FAT_VOLUME_TYPE;
-
-typedef enum {
-  CACHE_FAT,
-  CACHE_DATA,
-  CACHE_MAX_TYPE
-} CACHE_DATA_TYPE;
-
-//
-// Used in FatDiskIo
-//
-typedef enum {
-  READ_DISK     = 0,  // raw disk read
-  WRITE_DISK    = 1,  // raw disk write
-  READ_FAT      = 2,  // read fat cache
-  WRITE_FAT     = 3,  // write fat cache
-  READ_DATA     = 6,  // read data cache
-  WRITE_DATA    = 7   // write data cache
-} IO_MODE;
-
-#define CACHE_ENABLED(a)  ((a) >= 2)
-#define RAW_ACCESS(a)     ((IO_MODE)((a) & 0x1))
-#define CACHE_TYPE(a)     ((CACHE_DATA_TYPE)((a) >> 2))
-
-//
-// Disk cache tag
-//
-typedef struct {
-  UINTN   PageNo;
-  UINTN   RealSize;
-  BOOLEAN Dirty;
-} CACHE_TAG;
-
-typedef struct {
-  UINT64    BaseAddress;
-  UINT64    LimitAddress;
-  UINT8     *CacheBase;
-  BOOLEAN   Dirty;
-  UINT8     PageAlignment;
-  UINTN     GroupMask;
-  CACHE_TAG CacheTag[FAT_DATACACHE_GROUP_COUNT];
-} DISK_CACHE;
 
 //
 // Hash table size
@@ -303,14 +229,6 @@ typedef struct _NTFS_VOLUME {
 	//
 	CHAR8                          RootFileString[16];
 	//struct _NTFS_IFILE               *Root;
-
-	//
-	// Disk Cache for this volume
-	//
-	VOID                            *CacheBuffer;
-	DISK_CACHE                      DiskCache[CACHE_MAX_TYPE];
-
-
 
 	// struct ntfs_device *dev;                /* NTFS device handle */
 	ntfs_volume *vol;                       /* NTFS volume handle */
