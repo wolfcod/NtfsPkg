@@ -418,7 +418,7 @@ ntfs_vd *ntfsMount (const char *name, struct _NTFS_VOLUME *interface, sec_t star
     if (!name || !interface)
     {
         errno = EINVAL;
-        return false;
+        return NULL;
     }
 
     // Initialise ntfs-3g
@@ -439,12 +439,8 @@ ntfs_vd *ntfsMount (const char *name, struct _NTFS_VOLUME *interface, sec_t star
     if (!vd)
     {
         errno = ENOMEM;
-        return false;
+        return NULL;
     }
-	else
-    {
-	
-	}
 
     // Setup the volume descriptor
 	vd->id = 0;//interface->ioType;
