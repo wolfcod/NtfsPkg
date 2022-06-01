@@ -27,30 +27,15 @@ void DiagnosticSizeOf()
 
 }
 
-VOID NtfsCreateVolumeName(CHAR8 *RootFileString, UINTN Address)
+VOID
+NtfsCreateVolumeName(CHAR8 *RootFileString, UINTN Address)
 {
 	CHAR8 *szHex = "0123456789abcdef";
-
-	RootFileString[4] = szHex[Address % 0x10];
-	Address = Address >> 4;
-
-	RootFileString[5] = szHex[Address % 0x10];
-	Address = Address >> 4;
-
-	RootFileString[6] = szHex[Address % 0x10];
-	Address = Address >> 4;
-
-	RootFileString[7] = szHex[Address % 0x10];
-	Address = Address >> 4;
-
-	RootFileString[9] = szHex[Address % 0x10];
-	Address = Address >> 4;
-
-	RootFileString[9] = szHex[Address % 0x10];
-	Address = Address >> 4;
-
-	RootFileString[10] = szHex[Address % 0x10];
-	Address = Address >> 4;
+  for(int i = 4; i <= 10; i++)
+  {
+    RootFileString[i] szHex[Address % 0x10];
+    Address = Address >> 4;
+  }
 }
 
 EFI_STATUS
@@ -197,9 +182,9 @@ Returns:
                     NULL
                     );
 
-	if (Volume->vol != NULL) {
+	if (Volume->vol != NULL)
+  {
 		ntfs_umount(Volume->vol, 1);
-		
 	}
 
     if (EFI_ERROR (Status)) {
