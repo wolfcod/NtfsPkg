@@ -69,13 +69,15 @@
   
   Data.c
   UnicodeCollation.c
+  
 # libc
-  libc.c
-  stdio.c
-  snprintf.c
-  strerror.c
-  memmove.c
-  stdlib.c
+  libc/libc.c
+  libc/memmove.c
+  libc/snprintf.c
+  libc/stdio.c
+  libc/stdlib.c
+  libc/strerror.c
+  
 # NTFS3G drivers
   ntfs/acls.c
   ntfs/attrib.c
