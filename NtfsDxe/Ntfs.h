@@ -21,6 +21,47 @@ Revision History
 #ifndef __NTFS_DRIVER_H_
 #define __NTFS_DRIVER_H_
 
+#ifdef _WIN32
+#include <stdint.h>
+#include <Windows.h>
+/* Some definitions for building */
+typedef uint32_t EFI_STATUS;
+#define EFIAPI __stdcall
+#define UINTN unsigned int
+typedef char CHAR8;
+#ifdef __cplusplus
+typedef wchar_t CHAR16;
+#else
+typedef short CHAR16;
+#endif
+
+#define GLOBAL_REMOVE_IF_UNREFERENCED
+#define EFI_HANDLE void*
+
+#define EFI_UNSUPPORTED 0x80000003
+
+struct _EFI_COMPONENT_NAME_PROTOCOL;
+
+typedef EFI_STATUS(EFIAPI* EFI_COMPONENT_NAME2_GET_DRIVER_NAME)(struct _EFI_COMPONENT_NAME_PROTOCOL* This, IN  CHAR8* Language, OUT CHAR16** DriverName);
+typedef EFI_STATUS(EFIAPI* EFI_COMPONENT_NAME2_GET_CONTROLLER_NAME)(struct _EFI_COMPONENT_NAME_PROTOCOL* This,
+	IN  EFI_HANDLE                                      ControllerHandle,
+	IN  EFI_HANDLE                                      ChildHandle        OPTIONAL,
+	IN  CHAR8* Language,
+	OUT CHAR16** ControllerName
+	);
+
+typedef struct _EFI_COMPONENT_NAME_PROTOCOL {
+	EFI_COMPONENT_NAME2_GET_DRIVER_NAME GetDriverName;
+	EFI_COMPONENT_NAME2_GET_CONTROLLER_NAME GetControllerName;
+	const char* SupportedLanguages;
+} EFI_COMPONENT_NAME_PROTOCOL, EFI_COMPONENT_NAME2_PROTOCOL;
+
+typedef struct _EFI_UNICODE_STRING_TABLE {
+	const char* ascii;
+	const wchar_t* unicode;
+} EFI_UNICODE_STRING_TABLE;
+
+#else
 #include <Uefi.h>
 
 #include <Guid/FileInfo.h>
@@ -40,6 +81,7 @@ Revision History
 #include <Library/UefiDriverEntryPoint.h>
 #include <Library/UefiBootServicesTableLib.h>
 #include <Library/UefiRuntimeServicesTableLib.h>
+#endif
 
 #include "NtfsFileSystem.h"
 #include "ntfs/volume.h"

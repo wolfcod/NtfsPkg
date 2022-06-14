@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\asm">
+      <UniqueIdentifier>{570b1015-951c-42f4-8f37-6d9b8e4876bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\libc">
+      <UniqueIdentifier>{699e88d3-c876-4e27-a64b-30e7ba85af3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ntfs">
+      <UniqueIdentifier>{22ac90c1-4a47-49a0-af59-570a5a3afbd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ntfs">
+      <UniqueIdentifier>{f8d41eb8-6efe-4b26-ba39-cab3bff30f0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sys">
+      <UniqueIdentifier>{8a6a915d-a4e9-467b-9e6e-55ef6c66e3d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sys">
+      <UniqueIdentifier>{f557a90d-f925-4361-9735-e016a6f0db69}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ComponentName.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Data.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectoryManage.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Handle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Init.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Misc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ntfs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NtfsClose.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NtfsDelete.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NtfsFlush.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NtfsGetPosition.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NtfsInfo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NtfsOpen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NtfsOpenVolume.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NtfsRead.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NtfsSetPosition.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NtfsWrite.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UnicodeCollation.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\acls.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\attrib.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\attrlist.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\bitmap.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\bootsect.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\cache.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\collate.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\compat.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\compress.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\debug.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\device.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\device_io.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\dir.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\efs.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\index.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\inode.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\lcnalloc.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\list.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\logfile.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\logging.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\mem_allocate.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\mft.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\misc.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\mst.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\ntfsdir.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\ntfsfile.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\ntfsinternal.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\ntfsvol.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\object_id.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\realpath.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\reparse.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\runlist.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\security.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\support.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\uefi_io.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\unistr.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\utils.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\volume.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs\xattrs.c">
+      <Filter>Source Files\ntfs</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\bits.c">
+      <Filter>Source Files\sys</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ntfs\acls.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\attrib.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\attrlist.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\bit_ops.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\bitmap.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\bootsect.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\cache.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\cache2.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\collate.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\compat.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\compress.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\config.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\debug.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\device.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\device_io.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\dir.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\efs.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\endians.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\gekko_io.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\index.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\inode.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\layout.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\lcnalloc.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\list.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\logfile.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\logging.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\mem_allocate.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\mft.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\misc.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\mst.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\ntfs.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\ntfsdir.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\ntfsfile.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\ntfsinternal.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\ntfstime.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\object_id.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\param.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\realpath.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\reparse.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\runlist.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\security.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\support.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\types.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\unistr.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\utils.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\volume.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs\xattrs.h">
+      <Filter>Header Files\ntfs</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\cdefs.h">
+      <Filter>Header Files\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\errno.h">
+      <Filter>Header Files\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\stat.h">
+      <Filter>Header Files\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\statfs.h">
+      <Filter>Header Files\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\statvfs.h">
+      <Filter>Header Files\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\types.h">
+      <Filter>Header Files\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="assert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="errno.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fcntl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="grp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="limits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ntfs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfsfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NtfsFileSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfstime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pwd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="snprintf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdarg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="unistd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

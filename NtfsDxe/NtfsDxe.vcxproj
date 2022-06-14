@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{fd6d17a1-40aa-48e0-a442-53c57d030e63}</ProjectGuid>
+    <RootNamespace>NtfsDxe</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ComponentName.c" />
+    <ClCompile Include="Data.c" />
+    <ClCompile Include="DirectoryManage.c" />
+    <ClCompile Include="Handle.c" />
+    <ClCompile Include="Init.c" />
+    <ClCompile Include="Misc.c" />
+    <ClCompile Include="Ntfs.c" />
+    <ClCompile Include="NtfsClose.c" />
+    <ClCompile Include="NtfsDelete.c" />
+    <ClCompile Include="NtfsFlush.c" />
+    <ClCompile Include="NtfsGetPosition.c" />
+    <ClCompile Include="NtfsInfo.c" />
+    <ClCompile Include="NtfsOpen.c" />
+    <ClCompile Include="NtfsOpenVolume.c" />
+    <ClCompile Include="NtfsRead.c" />
+    <ClCompile Include="NtfsSetPosition.c" />
+    <ClCompile Include="NtfsWrite.c" />
+    <ClCompile Include="ntfs\acls.c" />
+    <ClCompile Include="ntfs\attrib.c" />
+    <ClCompile Include="ntfs\attrlist.c" />
+    <ClCompile Include="ntfs\bitmap.c" />
+    <ClCompile Include="ntfs\bootsect.c" />
+    <ClCompile Include="ntfs\cache.c" />
+    <ClCompile Include="ntfs\collate.c" />
+    <ClCompile Include="ntfs\compat.c" />
+    <ClCompile Include="ntfs\compress.c" />
+    <ClCompile Include="ntfs\debug.c" />
+    <ClCompile Include="ntfs\device.c" />
+    <ClCompile Include="ntfs\device_io.c" />
+    <ClCompile Include="ntfs\dir.c" />
+    <ClCompile Include="ntfs\efs.c" />
+    <ClCompile Include="ntfs\index.c" />
+    <ClCompile Include="ntfs\inode.c" />
+    <ClCompile Include="ntfs\lcnalloc.c" />
+    <ClCompile Include="ntfs\list.c" />
+    <ClCompile Include="ntfs\logfile.c" />
+    <ClCompile Include="ntfs\logging.c" />
+    <ClCompile Include="ntfs\mem_allocate.c" />
+    <ClCompile Include="ntfs\mft.c" />
+    <ClCompile Include="ntfs\misc.c" />
+    <ClCompile Include="ntfs\mst.c" />
+    <ClCompile Include="ntfs\ntfsdir.c" />
+    <ClCompile Include="ntfs\ntfsfile.c" />
+    <ClCompile Include="ntfs\ntfsinternal.c" />
+    <ClCompile Include="ntfs\ntfsvol.c" />
+    <ClCompile Include="ntfs\object_id.c" />
+    <ClCompile Include="ntfs\realpath.c" />
+    <ClCompile Include="ntfs\reparse.c" />
+    <ClCompile Include="ntfs\runlist.c" />
+    <ClCompile Include="ntfs\security.c" />
+    <ClCompile Include="ntfs\support.c" />
+    <ClCompile Include="ntfs\uefi_io.c" />
+    <ClCompile Include="ntfs\unistr.c" />
+    <ClCompile Include="ntfs\utils.c" />
+    <ClCompile Include="ntfs\volume.c" />
+    <ClCompile Include="ntfs\xattrs.c" />
+    <ClCompile Include="sys\bits.c" />
+    <ClCompile Include="UnicodeCollation.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="assert.h" />
+    <ClInclude Include="config.h" />
+    <ClInclude Include="errno.h" />
+    <ClInclude Include="fcntl.h" />
+    <ClInclude Include="grp.h" />
+    <ClInclude Include="limits.h" />
+    <ClInclude Include="mem.h" />
+    <ClInclude Include="Ntfs.h" />
+    <ClInclude Include="ntfsfile.h" />
+    <ClInclude Include="NtfsFileSystem.h" />
+    <ClInclude Include="ntfstime.h" />
+    <ClInclude Include="ntfs\acls.h" />
+    <ClInclude Include="ntfs\attrib.h" />
+    <ClInclude Include="ntfs\attrlist.h" />
+    <ClInclude Include="ntfs\bitmap.h" />
+    <ClInclude Include="ntfs\bit_ops.h" />
+    <ClInclude Include="ntfs\bootsect.h" />
+    <ClInclude Include="ntfs\cache.h" />
+    <ClInclude Include="ntfs\cache2.h" />
+    <ClInclude Include="ntfs\collate.h" />
+    <ClInclude Include="ntfs\compat.h" />
+    <ClInclude Include="ntfs\compress.h" />
+    <ClInclude Include="ntfs\config.h" />
+    <ClInclude Include="ntfs\debug.h" />
+    <ClInclude Include="ntfs\device.h" />
+    <ClInclude Include="ntfs\device_io.h" />
+    <ClInclude Include="ntfs\dir.h" />
+    <ClInclude Include="ntfs\efs.h" />
+    <ClInclude Include="ntfs\endians.h" />
+    <ClInclude Include="ntfs\gekko_io.h" />
+    <ClInclude Include="ntfs\index.h" />
+    <ClInclude Include="ntfs\inode.h" />
+    <ClInclude Include="ntfs\layout.h" />
+    <ClInclude Include="ntfs\lcnalloc.h" />
+    <ClInclude Include="ntfs\list.h" />
+    <ClInclude Include="ntfs\logfile.h" />
+    <ClInclude Include="ntfs\logging.h" />
+    <ClInclude Include="ntfs\mem_allocate.h" />
+    <ClInclude Include="ntfs\mft.h" />
+    <ClInclude Include="ntfs\misc.h" />
+    <ClInclude Include="ntfs\mst.h" />
+    <ClInclude Include="ntfs\ntfs.h" />
+    <ClInclude Include="ntfs\ntfsdir.h" />
+    <ClInclude Include="ntfs\ntfsfile.h" />
+    <ClInclude Include="ntfs\ntfsinternal.h" />
+    <ClInclude Include="ntfs\ntfstime.h" />
+    <ClInclude Include="ntfs\object_id.h" />
+    <ClInclude Include="ntfs\param.h" />
+    <ClInclude Include="ntfs\realpath.h" />
+    <ClInclude Include="ntfs\reparse.h" />
+    <ClInclude Include="ntfs\runlist.h" />
+    <ClInclude Include="ntfs\security.h" />
+    <ClInclude Include="ntfs\support.h" />
+    <ClInclude Include="ntfs\types.h" />
+    <ClInclude Include="ntfs\unistr.h" />
+    <ClInclude Include="ntfs\utils.h" />
+    <ClInclude Include="ntfs\volume.h" />
+    <ClInclude Include="ntfs\xattrs.h" />
+    <ClInclude Include="pwd.h" />
+    <ClInclude Include="snprintf.h" />
+    <ClInclude Include="stdarg.h" />
+    <ClInclude Include="stdint.h" />
+    <ClInclude Include="stdio.h" />
+    <ClInclude Include="stdlib.h" />
+    <ClInclude Include="string.h" />
+    <ClInclude Include="sys\cdefs.h" />
+    <ClInclude Include="sys\errno.h" />
+    <ClInclude Include="sys\stat.h" />
+    <ClInclude Include="sys\statfs.h" />
+    <ClInclude Include="sys\statvfs.h" />
+    <ClInclude Include="sys\types.h" />
+    <ClInclude Include="time.h" />
+    <ClInclude Include="unistd.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -9,7 +9,7 @@ Abstract:
 
 --*/
 
-#include "Ntfs.h"
+#include "../Ntfs.h"
 
 #define size_t int
 #define wchar_t	short

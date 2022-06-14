@@ -33,7 +33,7 @@ NtfsCreateVolumeName(CHAR8 *RootFileString, UINTN Address)
 	CHAR8 *szHex = "0123456789abcdef";
   for(int i = 4; i <= 10; i++)
   {
-    RootFileString[i] szHex[Address % 0x10];
+    RootFileString[i] = szHex[Address % 0x10];
     Address = Address >> 4;
   }
 }

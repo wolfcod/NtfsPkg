@@ -408,8 +408,8 @@ extern int errno;
 #define bool	char
 #define true	1
 #define false	0
-#elif (_MSC_VER == 1900)
-// visual studio 2015!
+#elif (_MSC_VER >= 1900)
+// visual studio 2015 and above...
 #define bool	char
 #define true	1
 #define false	0
