@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ntfspkg-test", "ntfspkg-tes
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NtfsDxe", "NtfsDxe\NtfsDxe.vcxproj", "{FD6D17A1-40AA-48E0-A442-53C57D030E63}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "include", "include\include.vcxitems", "{EBC520C5-99CB-4A58-8A36-011563BC3293}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
