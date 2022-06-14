@@ -22,6 +22,9 @@ Note: The project was compiled with Microsoft Visual Studio C++ 2008, 2010 and 2
 Note 2: You can add -D _NTFS_READONLY to build command line, to avoid any kind of write operations on disk.. The symbol
 disable ntfs_write_xx operations on disk.
 
+## Debugging
+To debug this driver using OvmfPkg add an entry into DSC file, build using source code and debug via
+`--serial pipe:pipe_1 (windbg \\.\pipe\pipe_1)`
 
 ## Unsupported platform
 

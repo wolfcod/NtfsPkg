@@ -23,7 +23,7 @@ Revision History
 
 #include <Uefi.h>
 
-#ifndef _WIN32
+#ifndef _WINDOWS_APPLICATION
 #include <Guid/FileInfo.h>
 #include <Guid/FileSystemInfo.h>
 #include <Guid/FileSystemVolumeLabelInfo.h>
