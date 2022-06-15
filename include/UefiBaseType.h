@@ -36,6 +36,7 @@ typedef short CHAR16;
 
 #define GLOBAL_REMOVE_IF_UNREFERENCED
 #define EFI_HANDLE void*
+#define EFI_EVENT void*
 
 #define EFI_SUCCESS		0x00000000
 #define EFI_UNSUPPORTED 0x80000003
